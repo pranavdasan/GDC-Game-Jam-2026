@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bdx66lu38ywr"]
+
+[ext_resource type="Texture2D" uid="uid://c4cek3ehkpegt" path="res://assets/images/player/snowball.png" id="1_6tw0o"]
+[ext_resource type="Script" uid="uid://cm77yugjvh4cc" path="res://scripts/snowball.gd" id="1_xsgkx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xsgkx"]
+radius = 19.0
+
+[node name="Snowball" type="RigidBody2D" unique_id=231169365]
+linear_damp = 0.5
+angular_damp = 1.0
+script = ExtResource("1_xsgkx")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1797674056]
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("1_6tw0o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=655201550]
+shape = SubResource("CircleShape2D_xsgkx")
