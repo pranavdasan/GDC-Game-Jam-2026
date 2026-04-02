@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://butql4r57fe2o"]
+
+[ext_resource type="Theme" uid="uid://bran1si2ii5s5" path="res://themes/theme.tres" id="1_uj65v"]
+
+[sub_resource type="Theme" id="Theme_5pe57"]
+
+[node name="CenterContainer" type="CenterContainer" unique_id=1929275149]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1770373465]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+theme = ExtResource("1_uj65v")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=229711544]
+layout_mode = 2
+theme = SubResource("Theme_5pe57")
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer" unique_id=661176912]
+layout_mode = 2
+theme = ExtResource("1_uj65v")
+text = "Shop"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="PanelContainer/VBoxContainer" unique_id=478539848]
+layout_mode = 2
+theme = ExtResource("1_uj65v")
+text = "first item in the shop"
+
+[node name="Button2" type="Button" parent="PanelContainer/VBoxContainer" unique_id=783787015]
+layout_mode = 2
+text = "second item in the shop (idk what im doing)"
