@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://b26l5yuwgym0m"]
+
+[ext_resource type="Texture2D" uid="uid://bk8bn1j0ckdft" path="res://assets/images/shop/shop.png" id="1_lx5au"]
+[ext_resource type="Script" uid="uid://4gta3hs2e1r4" path="res://scripts/shop.gd" id="1_xfvoa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1l46r"]
+size = Vector2(28, 34)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_032fp"]
+radius = 82.219215
+
+[node name="Shop" type="StaticBody2D" unique_id=1570701424]
+script = ExtResource("1_xfvoa")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=919508015]
+scale = Vector2(4.1600013, 4.1600013)
+texture = ExtResource("1_lx5au")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=630916857]
+scale = Vector2(4.1600013, 4.1600013)
+shape = SubResource("RectangleShape2D_1l46r")
+disabled = true
+
+[node name="Area2D" type="Area2D" parent="." unique_id=460984492]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1461120289]
+position = Vector2(0, 70)
+shape = SubResource("CircleShape2D_032fp")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

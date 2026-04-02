@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bdx66lu38ywr" path="res://scenes/snowball.tscn" id="1_2262g"]
 [ext_resource type="Texture2D" uid="uid://dbav4gaw8uehp" path="res://assets/images/tilemaps/snow_ground.png" id="2_wdj6m"]
+[ext_resource type="PackedScene" uid="uid://b26l5yuwgym0m" path="res://scenes/shop.tscn" id="3_l8qe7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wdj6m"]
 texture = ExtResource("2_wdj6m")
@@ -19,6 +20,9 @@ sources/0 = SubResource("TileSetAtlasSource_wdj6m")
 [node name="Snowball" parent="." unique_id=231169365 instance=ExtResource("1_2262g")]
 position = Vector2(969, 351)
 speed = 600.0
+
+[node name="Shop" parent="." unique_id=1570701424 instance=ExtResource("3_l8qe7")]
+position = Vector2(805, 370)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1755820554]
 position = Vector2(712, 328)

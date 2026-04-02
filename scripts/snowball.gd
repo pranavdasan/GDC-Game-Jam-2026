@@ -67,3 +67,6 @@ func update_scale() -> void:
 
 func update_mass() -> void:
 	mass = base_mass + (current_radius - base_radius) * mass_growth_multiplier
+	
+func player_shop_method() -> void:
+	pass
