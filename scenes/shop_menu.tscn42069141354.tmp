@@ -10,11 +10,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset_ratio = Vector2(0.5, 0.5)
 script = ExtResource("1_1ltno")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1770373465]
-custom_minimum_size = Vector2(1000, 500)
+custom_minimum_size = Vector2(800, 500)
 layout_mode = 2
 theme = ExtResource("1_uj65v")
 
@@ -34,6 +33,22 @@ theme_type_variation = &"title_label"
 text = "Shop"
 horizontal_alignment = 1
 
+[node name="item0" type="Button" parent="PanelContainer/HBoxContainer/Shop" unique_id=478539848]
+layout_mode = 2
+theme = ExtResource("1_uj65v")
+text = "shop1"
+autowrap_mode = 2
+
+[node name="item1" type="Button" parent="PanelContainer/HBoxContainer/Shop" unique_id=783787015]
+layout_mode = 2
+text = "shop2"
+autowrap_mode = 2
+
+[node name="item2" type="Button" parent="PanelContainer/HBoxContainer/Shop" unique_id=896122574]
+layout_mode = 2
+text = "shop3"
+autowrap_mode = 2
+
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer" unique_id=580572346]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -52,7 +67,6 @@ stretch_mode = 4
 custom_minimum_size = Vector2(0, 350)
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("1_uj65v")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer" unique_id=327251186]
 layout_mode = 2
@@ -65,7 +79,7 @@ size_flags_vertical = 3
 theme = ExtResource("1_uj65v")
 theme_type_variation = &"description_label"
 bbcode_enabled = true
-text = "[b]Ability:[/b]"
+text = "[b]Ability:[/b] awesome ability"
 fit_content = true
 scroll_active = false
 vertical_alignment = 1
@@ -77,7 +91,7 @@ size_flags_vertical = 3
 theme = ExtResource("1_uj65v")
 theme_type_variation = &"description_label"
 bbcode_enabled = true
-text = "[b]Description:[/b]"
+text = "[b]Description:[/b] this is a description of the ability and what it does"
 vertical_alignment = 1
 
 [node name="price_label" type="RichTextLabel" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=1908581159]
@@ -87,11 +101,14 @@ size_flags_vertical = 3
 theme = ExtResource("1_uj65v")
 theme_type_variation = &"description_label"
 bbcode_enabled = true
-text = "[b]Price:[/b]"
+text = "[b]Price:[/b] $50"
 fit_content = true
 vertical_alignment = 1
 
-[node name="buy_button" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=2058382173]
+[node name="Button" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=2058382173]
 layout_mode = 2
 theme = ExtResource("1_uj65v")
 text = "BUY"
+
+[connection signal="pressed" from="PanelContainer/HBoxContainer/Shop/item0" to="." method="_on_item_0_pressed"]
+[connection signal="toggled" from="PanelContainer/HBoxContainer/Shop/item0" to="." method="_on_item_0_toggled"]

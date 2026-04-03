@@ -3,17 +3,25 @@
 [ext_resource type="FontFile" uid="uid://d3jf0md4t4o00" path="res://assets/fonts/RobotoMono-Regular.ttf" id="1_kgv31"]
 [ext_resource type="StyleBox" uid="uid://drggxp8lmplme" path="res://themes/styles/button/hover.tres" id="2_a8t2u"]
 [ext_resource type="StyleBox" uid="uid://ihdyorkr8os8" path="res://themes/styles/panel_container/style_box_flat.tres" id="3_2hrgd"]
-[ext_resource type="StyleBox" uid="uid://dm3jqan7dv840" path="res://themes/styles/label/style_box_empty.tres" id="3_6c42i"]
 [ext_resource type="StyleBox" uid="uid://e5ppky0xtkmk" path="res://themes/styles/button/primary.tres" id="3_k0q7g"]
 [ext_resource type="StyleBox" uid="uid://5ctmtdnqerp3" path="res://themes/styles/button/pressed.tres" id="4_j33s6"]
+[ext_resource type="FontFile" uid="uid://nroxnlbsru6q" path="res://assets/fonts/RobotoMono-Bold.ttf" id="7_j33s6"]
+[ext_resource type="StyleBox" uid="uid://bkgydu8ies017" path="res://themes/styles/tab_container/style_box_flat.tres" id="7_k0q7g"]
 
 [resource]
+Button/font_sizes/font_size = 20
 Button/fonts/font = ExtResource("1_kgv31")
 Button/styles/hover = ExtResource("2_a8t2u")
 Button/styles/normal = ExtResource("3_k0q7g")
 Button/styles/pressed = ExtResource("4_j33s6")
-Label/font_sizes/font_size = 30
-Label/fonts/font = ExtResource("1_kgv31")
-Label/styles/normal = ExtResource("3_6c42i")
+HBoxContainer/constants/separation = 20
 PanelContainer/styles/panel = ExtResource("3_2hrgd")
+TabContainer/styles/panel = ExtResource("7_k0q7g")
 VBoxContainer/constants/separation = 20
+description_label/base_type = &"RichTextLabel"
+description_label/font_sizes/font_size = 17
+description_label/fonts/bold_font = ExtResource("7_j33s6")
+description_label/fonts/normal_font = ExtResource("1_kgv31")
+title_label/base_type = &"Label"
+title_label/font_sizes/font_size = 35
+title_label/fonts/font = ExtResource("1_kgv31")
