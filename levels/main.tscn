@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bdx66lu38ywr" path="res://scenes/snowball.tscn" id="1_2262g"]
 [ext_resource type="Texture2D" uid="uid://dbav4gaw8uehp" path="res://assets/images/tilemaps/snow_ground.png" id="2_wdj6m"]
 [ext_resource type="PackedScene" uid="uid://b26l5yuwgym0m" path="res://scenes/shop.tscn" id="3_l8qe7"]
+[ext_resource type="PackedScene" uid="uid://wxd7weptev4l" path="res://scenes/hud.tscn" id="4_m1504"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wdj6m"]
 texture = ExtResource("2_wdj6m")
@@ -33,3 +34,5 @@ tile_set = SubResource("TileSet_l8qe7")
 
 [node name="Shop" parent="." unique_id=1570701424 instance=ExtResource("3_l8qe7")]
 position = Vector2(579, 371)
+
+[node name="hud" parent="." unique_id=2064421710 instance=ExtResource("4_m1504")]

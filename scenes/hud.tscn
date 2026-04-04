@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://wxd7weptev4l"]
+
+[ext_resource type="Script" uid="uid://cvhtgrnsobvly" path="res://scripts/snow_meter.gd" id="2_uo2fv"]
+[ext_resource type="Script" uid="uid://gbtdpta05jw1" path="res://scripts/snobux_counter.gd" id="3_6fi6k"]
+[ext_resource type="Theme" uid="uid://bran1si2ii5s5" path="res://themes/theme.tres" id="3_047uy"]
+[ext_resource type="FontFile" uid="uid://nroxnlbsru6q" path="res://assets/fonts/RobotoMono-Bold.ttf" id="4_5pdws"]
+
+[node name="hud" type="CanvasLayer" unique_id=2064421710]
+
+[node name="snow_meter" type="CenterContainer" parent="." unique_id=1946992301]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1699.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_uo2fv")
+
+[node name="ProgressBar" type="ProgressBar" parent="snow_meter" unique_id=1931638114]
+custom_minimum_size = Vector2(55, 900)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("3_047uy")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="snobux_counter" type="CenterContainer" parent="." unique_id=1208177851]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_top = 946.0
+offset_right = 247.0
+grow_vertical = 2
+script = ExtResource("3_6fi6k")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="snobux_counter" unique_id=1068580616]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_fonts/bold_font = ExtResource("4_5pdws")
+theme_override_font_sizes/bold_font_size = 50
+bbcode_enabled = true
+text = "[b]$50"
+fit_content = true

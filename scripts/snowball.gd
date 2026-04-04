@@ -70,3 +70,6 @@ func update_mass() -> void:
 	
 func player_shop_method() -> void:
 	pass
+
+func _process(delta: float) -> void:
+	Global.snow_meter = (current_radius - base_radius) / (max_radius - base_radius) * 100

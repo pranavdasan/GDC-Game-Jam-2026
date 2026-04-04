@@ -19,10 +19,15 @@ run/main_scene="uid://dsiqdluh170ov"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://assets/icon.svg"
 
+[autoload]
+
+Global="*uid://l2g43383bcfn"
+
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/stretch/mode="viewport"
 
 [editor]
 

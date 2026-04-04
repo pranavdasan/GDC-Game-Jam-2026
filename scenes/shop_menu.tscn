@@ -2,9 +2,13 @@
 
 [ext_resource type="Script" uid="uid://b5l5ub6n44xqr" path="res://scripts/shop_menu.gd" id="1_1ltno"]
 [ext_resource type="Theme" uid="uid://bran1si2ii5s5" path="res://themes/theme.tres" id="1_uj65v"]
-[ext_resource type="Texture2D" uid="uid://bef2s6ct3plih" path="res://assets/icon.svg" id="2_5pe57"]
+[ext_resource type="Texture2D" uid="uid://cgoehgjdg8xf6" path="res://assets/images/shop/abilities.png" id="3_1ltno"]
 
-[node name="Shop Menu" type="CanvasLayer" unique_id=1582675053]
+[sub_resource type="AtlasTexture" id="AtlasTexture_76m3e"]
+atlas = ExtResource("3_1ltno")
+region = Rect2(0, 0, 32, 32)
+
+[node name="shop_menu" type="CanvasLayer" unique_id=1582675053]
 script = ExtResource("1_1ltno")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1770373465]
@@ -48,7 +52,7 @@ custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("2_5pe57")
+texture = SubResource("AtlasTexture_76m3e")
 expand_mode = 4
 stretch_mode = 4
 
@@ -60,12 +64,12 @@ theme = ExtResource("1_uj65v")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer" unique_id=327251186]
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 30
+alignment = 1
 
 [node name="name_label" type="RichTextLabel" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=59417181]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
-size_flags_vertical = 3
 theme = ExtResource("1_uj65v")
 theme_type_variation = &"description_label"
 bbcode_enabled = true
@@ -75,19 +79,18 @@ scroll_active = false
 vertical_alignment = 1
 
 [node name="description_label" type="RichTextLabel" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=217064078]
-custom_minimum_size = Vector2(250, 75)
+custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
-size_flags_vertical = 3
 theme = ExtResource("1_uj65v")
 theme_type_variation = &"description_label"
 bbcode_enabled = true
 text = "[b]Description:[/b]"
+fit_content = true
 vertical_alignment = 1
 
 [node name="price_label" type="RichTextLabel" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=1908581159]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
-size_flags_vertical = 3
 theme = ExtResource("1_uj65v")
 theme_type_variation = &"description_label"
 bbcode_enabled = true

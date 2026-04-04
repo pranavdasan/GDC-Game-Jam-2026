@@ -5,8 +5,11 @@
 [ext_resource type="StyleBox" uid="uid://ihdyorkr8os8" path="res://themes/styles/panel_container/style_box_flat.tres" id="3_2hrgd"]
 [ext_resource type="StyleBox" uid="uid://e5ppky0xtkmk" path="res://themes/styles/button/primary.tres" id="3_k0q7g"]
 [ext_resource type="StyleBox" uid="uid://5ctmtdnqerp3" path="res://themes/styles/button/pressed.tres" id="4_j33s6"]
+[ext_resource type="StyleBox" uid="uid://j8321cdgqekm" path="res://themes/styles/progress_bar/background.tres" id="6_8gf3l"]
+[ext_resource type="StyleBox" uid="uid://bssebwf2xowcb" path="res://themes/styles/progress_bar/fill.tres" id="7_0jcxo"]
 [ext_resource type="FontFile" uid="uid://nroxnlbsru6q" path="res://assets/fonts/RobotoMono-Bold.ttf" id="7_j33s6"]
 [ext_resource type="StyleBox" uid="uid://bkgydu8ies017" path="res://themes/styles/tab_container/style_box_flat.tres" id="7_k0q7g"]
+[ext_resource type="StyleBox" uid="uid://bxpuwcys0x06j" path="res://themes/styles/snow_meter/style_box_flat.tres" id="10_nxnlh"]
 
 [resource]
 Button/colors/font_color = Color(0.09320194, 0.0955437, 0.10491073, 1)
@@ -17,13 +20,17 @@ Button/styles/normal = ExtResource("3_k0q7g")
 Button/styles/pressed = ExtResource("4_j33s6")
 HBoxContainer/constants/separation = 20
 PanelContainer/styles/panel = ExtResource("3_2hrgd")
+ProgressBar/styles/background = ExtResource("6_8gf3l")
+ProgressBar/styles/fill = ExtResource("7_0jcxo")
 TabContainer/styles/panel = ExtResource("7_k0q7g")
 VBoxContainer/constants/separation = 20
 description_label/base_type = &"RichTextLabel"
-description_label/font_sizes/bold_font_size = 20
-description_label/font_sizes/normal_font_size = 20
+description_label/font_sizes/bold_font_size = 25
+description_label/font_sizes/normal_font_size = 25
 description_label/fonts/bold_font = ExtResource("7_j33s6")
 description_label/fonts/normal_font = ExtResource("1_kgv31")
+snow_meter/base_type = &"PanelContainer"
+snow_meter/styles/panel = ExtResource("10_nxnlh")
 title_label/base_type = &"Label"
 title_label/font_sizes/font_size = 100
 title_label/fonts/font = ExtResource("7_j33s6")
