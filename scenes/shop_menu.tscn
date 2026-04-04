@@ -4,18 +4,22 @@
 [ext_resource type="Theme" uid="uid://bran1si2ii5s5" path="res://themes/theme.tres" id="1_uj65v"]
 [ext_resource type="Texture2D" uid="uid://bef2s6ct3plih" path="res://assets/icon.svg" id="2_5pe57"]
 
-[node name="Shop Menu" type="CenterContainer" unique_id=1929275149]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset_ratio = Vector2(0.5, 0.5)
+[node name="Shop Menu" type="CanvasLayer" unique_id=1582675053]
 script = ExtResource("1_1ltno")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1770373465]
-custom_minimum_size = Vector2(1000, 500)
-layout_mode = 2
+custom_minimum_size = Vector2(1400, 800)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -700.0
+offset_top = -325.0
+offset_right = 700.0
+offset_bottom = 325.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("1_uj65v")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer" unique_id=783992855]
@@ -24,7 +28,7 @@ layout_mode = 2
 [node name="Shop" type="VBoxContainer" parent="PanelContainer/HBoxContainer" unique_id=96698487]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 1.5
+size_flags_stretch_ratio = 0.8
 theme = ExtResource("1_uj65v")
 
 [node name="title_label" type="Label" parent="PanelContainer/HBoxContainer/Shop" unique_id=661176912]
@@ -40,7 +44,7 @@ size_flags_horizontal = 3
 theme = ExtResource("1_uj65v")
 
 [node name="item_icon" type="TextureRect" parent="PanelContainer/HBoxContainer/VBoxContainer" unique_id=1998728694]
-custom_minimum_size = Vector2(200, 0)
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4

@@ -1,14 +1,14 @@
-extends CenterContainer
+extends CanvasLayer
 
 var abilities : Array[Ability] = [
 	Ability.new(
 	"Dash",
 	"Allows the user to rapidly move in a certain direction at the cost of some snow",
-	50.0),
+	50),
 	Ability.new(
 	"Snow Jetpack",
 	"Boost upwards at a high speed at the cost of some snow",
-	100.0)
+	100)
 ]
 
 var item_buttons : Array[Button] = []

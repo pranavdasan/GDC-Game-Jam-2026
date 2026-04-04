@@ -9,6 +9,7 @@
 [ext_resource type="StyleBox" uid="uid://bkgydu8ies017" path="res://themes/styles/tab_container/style_box_flat.tres" id="7_k0q7g"]
 
 [resource]
+Button/colors/font_color = Color(0.09320194, 0.0955437, 0.10491073, 1)
 Button/font_sizes/font_size = 20
 Button/fonts/font = ExtResource("1_kgv31")
 Button/styles/hover = ExtResource("2_a8t2u")
@@ -19,9 +20,10 @@ PanelContainer/styles/panel = ExtResource("3_2hrgd")
 TabContainer/styles/panel = ExtResource("7_k0q7g")
 VBoxContainer/constants/separation = 20
 description_label/base_type = &"RichTextLabel"
-description_label/font_sizes/font_size = 17
+description_label/font_sizes/bold_font_size = 20
+description_label/font_sizes/normal_font_size = 20
 description_label/fonts/bold_font = ExtResource("7_j33s6")
 description_label/fonts/normal_font = ExtResource("1_kgv31")
 title_label/base_type = &"Label"
-title_label/font_sizes/font_size = 35
-title_label/fonts/font = ExtResource("1_kgv31")
+title_label/font_sizes/font_size = 100
+title_label/fonts/font = ExtResource("7_j33s6")
