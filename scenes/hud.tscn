@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://wxd7weptev4l"]
 
-[ext_resource type="Script" uid="uid://cvhtgrnsobvly" path="res://scripts/snow_meter.gd" id="2_uo2fv"]
-[ext_resource type="Script" uid="uid://gbtdpta05jw1" path="res://scripts/snobux_counter.gd" id="3_6fi6k"]
+[ext_resource type="Script" uid="uid://cvhtgrnsobvly" path="res://scripts/hud/snow_meter.gd" id="2_uo2fv"]
+[ext_resource type="Script" uid="uid://gbtdpta05jw1" path="res://scripts/hud/snobux_counter.gd" id="3_6fi6k"]
 [ext_resource type="Theme" uid="uid://bran1si2ii5s5" path="res://themes/theme.tres" id="3_047uy"]
 [ext_resource type="FontFile" uid="uid://nroxnlbsru6q" path="res://assets/fonts/RobotoMono-Bold.ttf" id="4_5pdws"]
 
@@ -34,10 +34,12 @@ grow_vertical = 2
 script = ExtResource("3_6fi6k")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="snobux_counter" unique_id=1068580616]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 theme_override_fonts/bold_font = ExtResource("4_5pdws")
 theme_override_font_sizes/bold_font_size = 50
 bbcode_enabled = true
 text = "[b]$50"
 fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1

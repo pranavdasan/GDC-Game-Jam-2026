@@ -8,6 +8,13 @@
 atlas = ExtResource("3_1ltno")
 region = Rect2(0, 0, 32, 32)
 
+[sub_resource type="GDScript" id="GDScript_1ltno"]
+script/source = "extends Button
+
+func _on_buy_button_pressed() -> void:
+	if Global.snobux >=
+"
+
 [node name="shop_menu" type="CanvasLayer" unique_id=1582675053]
 script = ExtResource("1_1ltno")
 
@@ -102,5 +109,6 @@ vertical_alignment = 1
 layout_mode = 2
 theme = ExtResource("1_uj65v")
 text = "BUY"
+script = SubResource("GDScript_1ltno")
 
 [connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/buy_button" to="." method="_on_buy_button_pressed"]
