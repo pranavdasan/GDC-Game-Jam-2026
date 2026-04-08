@@ -8,6 +8,8 @@
 [ext_resource type="StyleBox" uid="uid://j8321cdgqekm" path="res://themes/styles/progress_bar/background.tres" id="6_8gf3l"]
 [ext_resource type="StyleBox" uid="uid://bssebwf2xowcb" path="res://themes/styles/progress_bar/fill.tres" id="7_0jcxo"]
 [ext_resource type="FontFile" uid="uid://nroxnlbsru6q" path="res://assets/fonts/RobotoMono-Bold.ttf" id="7_j33s6"]
+[ext_resource type="StyleBox" uid="uid://b03ehu5nvpj5b" path="res://themes/styles/progress_bar/cooldown_bar/style_box_empty.tres" id="8_0jcxo"]
+[ext_resource type="StyleBox" uid="uid://ctgots2u82akk" path="res://themes/styles/progress_bar/cooldown_bar/style_box_flat.tres" id="9_nxnlh"]
 [ext_resource type="StyleBox" uid="uid://bxpuwcys0x06j" path="res://themes/styles/snow_meter/style_box_flat.tres" id="10_nxnlh"]
 
 [resource]
@@ -22,6 +24,9 @@ PanelContainer/styles/panel = ExtResource("3_2hrgd")
 ProgressBar/styles/background = ExtResource("6_8gf3l")
 ProgressBar/styles/fill = ExtResource("7_0jcxo")
 VBoxContainer/constants/separation = 20
+cooldown_bar/base_type = &"ProgressBar"
+cooldown_bar/styles/background = ExtResource("8_0jcxo")
+cooldown_bar/styles/fill = ExtResource("9_nxnlh")
 description_label/base_type = &"RichTextLabel"
 description_label/font_sizes/bold_font_size = 25
 description_label/font_sizes/normal_font_size = 25

@@ -27,10 +27,20 @@ func _input(event) -> void:
 				use_ability(ability_id)
 
 func use_ability(ability_id : int) -> void:
-	match ability_id:
-		0:
-			pass
-		1:
-			pass
-		2:
-			pass
+	# gets the real ability button node for used ability
+	var ability_button_index : int = ability_hud.created_ability_button_ids.find(ability_id)
+	var ability_button : Button = ability_hud.get_children()[ability_button_index]
+	
+	# to make sure the ability is not on cooldown
+	if ability_button.cooldown_timer.time_left == 0.0:
+		# starts cooldown for that ability
+		ability_button.use_ability(ability_id)
+		
+		# actual code for the ability
+		match ability_id:
+			0:
+				pass
+			1:
+				pass
+			2:
+				pass

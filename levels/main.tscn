@@ -36,6 +36,6 @@ zoom = Vector2(0.9, 0.9)
 position_smoothing_enabled = true
 
 [node name="Shop" parent="." unique_id=1570701424 instance=ExtResource("3_l8qe7")]
-position = Vector2(579, 371)
+position = Vector2(737, 362)
 
 [node name="hud" parent="." unique_id=2064421710 instance=ExtResource("4_m1504")]
