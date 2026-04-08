@@ -47,6 +47,6 @@ offset_right = 960.0
 offset_bottom = -27.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_constants/separation = 50
+theme = ExtResource("3_047uy")
 alignment = 1
 script = ExtResource("5_uo2fv")

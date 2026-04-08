@@ -47,7 +47,7 @@ func _ready() -> void:
 	# 8 being the grid width (of the tilemap w/ ability images)
 	# if it doesn't work blame ai i asked him how to get grid coordinates from id thing
 
-func ability_button_pressed(ability_id : int):
+func ability_button_pressed(ability_id : int) -> void:
 	# sets details for corresponding ability
 	name_label.text = "[b]Ability: [/b] " + Global.abilities[ability_id].ability_name
 	description_label.text = "[b]Description: [/b]" + Global.abilities[ability_id].description

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bxt5jq41arpqr"]
+
+[ext_resource type="Script" uid="uid://cyqoihbq4un17" path="res://scripts/ability_handler.gd" id="1_m5es3"]
+
+[node name="ability_handler" type="Node" unique_id=1548632360]
+script = ExtResource("1_m5es3")
