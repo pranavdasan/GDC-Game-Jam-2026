@@ -7,4 +7,4 @@ func _ready() -> void:
 	Global.snobux_changed.connect(on_snobux_changed)
 
 func on_snobux_changed() -> void:
-	self.text = "[b]$" + str(Global.snobux)
+	text = "[b]$" + str(Global.snobux)

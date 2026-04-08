@@ -7,4 +7,4 @@ func _ready() -> void:
 	Global.snow_meter_changed.connect(on_snow_meter_changed)
 
 func on_snow_meter_changed() -> void:
-	self.value = Global.snow_meter
+	value = Global.snow_meter

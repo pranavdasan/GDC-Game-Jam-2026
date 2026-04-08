@@ -8,7 +8,6 @@
 [ext_resource type="StyleBox" uid="uid://j8321cdgqekm" path="res://themes/styles/progress_bar/background.tres" id="6_8gf3l"]
 [ext_resource type="StyleBox" uid="uid://bssebwf2xowcb" path="res://themes/styles/progress_bar/fill.tres" id="7_0jcxo"]
 [ext_resource type="FontFile" uid="uid://nroxnlbsru6q" path="res://assets/fonts/RobotoMono-Bold.ttf" id="7_j33s6"]
-[ext_resource type="StyleBox" uid="uid://bkgydu8ies017" path="res://themes/styles/tab_container/style_box_flat.tres" id="7_k0q7g"]
 [ext_resource type="StyleBox" uid="uid://bxpuwcys0x06j" path="res://themes/styles/snow_meter/style_box_flat.tres" id="10_nxnlh"]
 
 [resource]
@@ -22,7 +21,6 @@ HBoxContainer/constants/separation = 20
 PanelContainer/styles/panel = ExtResource("3_2hrgd")
 ProgressBar/styles/background = ExtResource("6_8gf3l")
 ProgressBar/styles/fill = ExtResource("7_0jcxo")
-TabContainer/styles/panel = ExtResource("7_k0q7g")
 VBoxContainer/constants/separation = 20
 description_label/base_type = &"RichTextLabel"
 description_label/font_sizes/bold_font_size = 25

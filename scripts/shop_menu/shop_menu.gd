@@ -1,67 +1,82 @@
 extends CanvasLayer
 
-const spriteSheetWidth : int = 32
-
-var abilities : Array[Ability] = Global.abilities
-
-var item_buttons : Array[Button] = []
+const ability_shop_button = preload("res://scenes/ability_shop_button.tscn")
+const ability_sheet_pixel_width : int = Global.ability_sheet_pixel_width
 
 @onready var buy_button : Button = $PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/buy_button
 
-#ability detail nodes
+# ability detail nodes
 @onready var name_label : RichTextLabel = $PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/name_label
 @onready var description_label : RichTextLabel = $PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/description_label
 @onready var price_label : RichTextLabel = $PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/price_label
 @onready var item_icon : TextureRect = $PanelContainer/HBoxContainer/VBoxContainer/item_icon
 
-var selected_ability_index : int
+var shop_abilities : Array[Ability]
+var selected_id : int = -1
 
-# Called when the node enters the scene tree for the first time.
+#  Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	for i in abilities.size():
-		var button : Button = Button.new()
-		button.autowrap_mode = TextServer.AUTOWRAP_WORD
-		button.name = abilities[i].ability_name
-		button.text = abilities[i].ability_name
-		
-		button.pressed.connect(button_pressed.bind(i))
-		
-		item_buttons.append(button)
-		
+	#  creates a button for each type of ability
+	#  later i want to change this so then it's randomly generated per shop or smth
+	for ability in Global.abilities:
+		var button = ability_shop_button.instantiate()
+		button.name = ability.ability_name
+		button.text = ability.ability_name
 		$PanelContainer/HBoxContainer/Shop.add_child(button)
+		
+		button.pressed.connect(ability_button_pressed.bind(ability.id))
+		
+		shop_abilities.append(ability)
 	
-	#default ability is set to the button w/ index 0
-	name_label.text = "[b]Ability: [/b] " + abilities[0].ability_name
-	description_label.text = "[b]Description: [/b]" + abilities[0].description
-	price_label.text = "[b]Price:[/b] $" + str(abilities[0].price)
+	# sets default icons and details to first item
+	name_label.text = "[b]Ability: [/b] " + shop_abilities[0].ability_name
+	description_label.text = "[b]Description: [/b]" + shop_abilities[0].description
+	price_label.text = "[b]Price:[/b] $" + str(shop_abilities[0].price)
 	
-	selected_ability_index = 0
+	# sets ability ID for first item
+	selected_id = shop_abilities[0].id
 	
-	item_icon.texture.region.position = Vector2(0,0)
+	# sets image for first item
+	item_icon.texture.region.position = Vector2(
+			shop_abilities[0].id % 8 * ability_sheet_pixel_width,
+			floor(float(shop_abilities[0].id) / 8) * ability_sheet_pixel_width
+		)
+	# ^^^^^^^^^^^^^^^^^
+	# x position on grid: ability_id % 8
+	# y position on grid: floor(ability_id / 8)
+	# 8 being the grid width (of the tilemap w/ ability images)
+	# if it doesn't work blame ai i asked him how to get grid coordinates from id thing
 
-func button_pressed(button_index : int):
-	name_label.text = "[b]Ability: [/b] " + abilities[button_index].ability_name
-	description_label.text = "[b]Description: [/b]" + abilities[button_index].description
-	price_label.text = "[b]Price:[/b] $" + str(abilities[button_index].price)
+func ability_button_pressed(ability_id : int):
+	# sets details for corresponding ability
+	name_label.text = "[b]Ability: [/b] " + Global.abilities[ability_id].ability_name
+	description_label.text = "[b]Description: [/b]" + Global.abilities[ability_id].description
+	price_label.text = "[b]Price:[/b] $" + str(Global.abilities[ability_id].price)
 	
-	selected_ability_index = button_index
+	# sets ability ID
+	selected_id = ability_id
 	
-	#x position on grid: button_index % 8
-	#y position on grid: floor(button_index / 8)
-	#8 being the grid width
-	item_icon.texture.region.position = Vector2(button_index % 8 * spriteSheetWidth,floor(float(button_index) / 8) * spriteSheetWidth)
+	# sets image for corresponding ability:
+	# see above for how i got these
+	item_icon.texture.region.position = Vector2(
+			ability_id % 8 * ability_sheet_pixel_width,
+			floor(float(ability_id) / 8) * ability_sheet_pixel_width
+		)
 
 func _on_buy_button_pressed() -> void:
-	var selected_ability : Ability = abilities[selected_ability_index]
+	var selected_ability : Ability = Global.abilities[selected_id]
+	
+	# if user has enough snobux and doesn't already own ability
 	if Global.snobux >= selected_ability.price and Global.owned_abilities.find(selected_ability) == -1:
 		Global.set_snobux(Global.snobux - selected_ability.price)
-		Global.owned_abilities.append(selected_ability)
+		Global.add_owned_ability(selected_ability)
 		
-		#so that player knows they successfully bought
+		# so that player knows they successfully bought
 		buy_button.modulate = Color.GREEN
 	else:
-		#so that player knows they did not successfully bought
+		# so that player knows they did not successfully bought
 		buy_button.modulate = Color.RED
 
 func _on_buy_button_button_up() -> void:
+	# uncolors the buy button when ability is purchased/failed to purchase
 	buy_button.modulate = Color.WHITE

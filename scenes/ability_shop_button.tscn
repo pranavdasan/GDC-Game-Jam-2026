@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dlh87fjrkr0da"]
+
+[node name="ability_shop_button" type="Button" unique_id=1152161285]
+offset_right = 8.0
+offset_bottom = 54.0
+action_mode = 0
+text = "ability name"
+autowrap_mode = 2
