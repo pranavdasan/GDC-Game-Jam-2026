@@ -101,6 +101,8 @@ vertical_alignment = 1
 [node name="buy_button" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=2058382173]
 layout_mode = 2
 theme = ExtResource("1_uj65v")
+action_mode = 0
 text = "BUY"
 
+[connection signal="button_up" from="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/buy_button" to="." method="_on_buy_button_button_up"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/buy_button" to="." method="_on_buy_button_pressed"]

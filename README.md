@@ -1,4 +1,3 @@
 # game-jam-project
-
-##this is a good project
-about snowballs
+---
+## this is a good project ==about snowballs==

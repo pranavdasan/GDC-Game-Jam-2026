@@ -54,8 +54,14 @@ func button_pressed(button_index : int):
 func _on_buy_button_pressed() -> void:
 	var selected_ability : Ability = abilities[selected_ability_index]
 	if Global.snobux >= selected_ability.price and Global.owned_abilities.find(selected_ability) == -1:
-		Global.snobux -= selected_ability.price
+		Global.set_snobux(Global.snobux - selected_ability.price)
 		Global.owned_abilities.append(selected_ability)
-		#show user they bought it
+		
+		#so that player knows they successfully bought
+		buy_button.modulate = Color.GREEN
 	else:
-		pass #show user that they cant buy
+		#so that player knows they did not successfully bought
+		buy_button.modulate = Color.RED
+
+func _on_buy_button_button_up() -> void:
+	buy_button.modulate = Color.WHITE

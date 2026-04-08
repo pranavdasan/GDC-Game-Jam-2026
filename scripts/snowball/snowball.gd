@@ -14,7 +14,6 @@ extends RigidBody2D
 var current_radius: float
 var original_sprite_scale: Vector2
 
-
 func _ready() -> void:
 	current_radius = base_radius
 	original_sprite_scale = sprite.scale
@@ -25,10 +24,8 @@ func _ready() -> void:
 	update_scale()
 	update_mass()
 
-
 func _physics_process(delta: float) -> void:
 	handle_movement(delta)
-
 
 func handle_movement(delta: float) -> void:
 	var input_vector = Vector2.ZERO
@@ -38,8 +35,6 @@ func handle_movement(delta: float) -> void:
 		apply_central_force(input_vector * speed)
 		
 		handle_growth(delta)
-
-	
 
 func handle_growth(delta: float) -> void:
 	# Check if snowball fully moving (so not for every button press)
@@ -56,10 +51,10 @@ func handle_growth(delta: float) -> void:
 	update_collisionShape()
 	update_scale()
 	update_mass()
+	update_snow_meter()
 
 func update_collisionShape() -> void:
 	collision_shape.shape.radius = current_radius
-
 
 func update_scale() -> void:
 	var scale_ratio: float = current_radius / base_radius
@@ -67,9 +62,9 @@ func update_scale() -> void:
 
 func update_mass() -> void:
 	mass = base_mass + (current_radius - base_radius) * mass_growth_multiplier
-	
+
+func update_snow_meter() -> void:
+	Global.set_snow_meter((current_radius - base_radius) / (max_radius - base_radius) * 100)
+
 func player_shop_method() -> void:
 	pass
-
-func _process(delta: float) -> void:
-	Global.snow_meter = (current_radius - base_radius) / (max_radius - base_radius) * 100

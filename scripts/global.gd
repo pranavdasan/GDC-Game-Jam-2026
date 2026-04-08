@@ -20,8 +20,16 @@ var abilities : Array[Ability] = [
 
 var owned_abilities : Array[Ability]
 
+signal snobux_changed()
+signal snow_meter_changed()
+
 var snobux : int = 200
 var snow_meter : float = 0.0
 
-func wait(seconds: float) -> void:
-	await get_tree().create_timer(seconds).timeout
+func set_snobux(value : int) -> void:
+	snobux = value
+	emit_signal("snobux_changed")
+
+func set_snow_meter(value : float) -> void:
+	snow_meter = value
+	emit_signal("snow_meter_changed")

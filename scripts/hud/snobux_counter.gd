@@ -1,5 +1,10 @@
-extends CenterContainer
+extends RichTextLabel
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	$RichTextLabel.text = "[b]$" + str(Global.snobux)
+func _ready() -> void:
+	#to set the first value
+	on_snobux_changed()
+	
+	Global.snobux_changed.connect(on_snobux_changed)
+
+func on_snobux_changed() -> void:
+	self.text = "[b]$" + str(Global.snobux)
