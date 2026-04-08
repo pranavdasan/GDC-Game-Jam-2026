@@ -34,7 +34,7 @@ func use_ability(ability_id : int) -> void:
 	# to make sure the ability is not on cooldown
 	if ability_button.cooldown_timer.time_left == 0.0:
 		# starts cooldown for that ability
-		ability_button.use_ability(ability_id)
+		ability_button.start_cooldown(ability_id)
 		
 		# actual code for the ability
 		match ability_id:

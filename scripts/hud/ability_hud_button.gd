@@ -11,5 +11,5 @@ func _process(delta: float) -> void:
 		cooldown_bar.value = 0.0
 
 # starts the cooldown timer based on ability cooldown
-func use_ability(ability_id : int):	
+func start_cooldown(ability_id : int):	
 	cooldown_timer.start(Global.abilities[ability_id].cooldown)

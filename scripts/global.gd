@@ -5,18 +5,21 @@ var abilities : Array[Ability] = [
 		"Dash",
 		"Allows the user to rapidly move in a certain direction at the cost of some snow",
 		10,
+		1.0,
 		0
 	),
 	Ability.new(
 		"Snow Jetpack",
 		"Boost upwards at a high speed at the cost of some snow",
 		20,
+		2.0,
 		1
 	),
 	Ability.new(
 		"Snow Gun",
 		"Shoots some snow towards the mouse at the cost of some snow",
 		30,
+		3.0,
 		2
 	)
 ]
@@ -35,12 +38,12 @@ var snow_meter : float = 0.0
 
 func add_owned_ability(ability : Ability) -> void:
 	owned_abilities.append(ability)
-	emit_signal("owned_abilities_added")
+	owned_abilities_added.emit()
 
 func set_snobux(value : int) -> void:
 	snobux = value
-	emit_signal("snobux_changed")
+	snobux_changed.emit()
 
 func set_snow_meter(value : float) -> void:
 	snow_meter = value
-	emit_signal("snow_meter_changed")
+	snow_meter_changed.emit()
