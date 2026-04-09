@@ -8,7 +8,7 @@
 atlas = ExtResource("1_8a0om")
 region = Rect2(0, 0, 32, 32)
 
-[node name="ability_hud_button" type="Button" unique_id=771338579]
+[node name="AbilityHudButton" type="Button" unique_id=771338579]
 custom_minimum_size = Vector2(128, 128)
 offset_right = 30.0
 offset_bottom = 20.0
@@ -24,7 +24,7 @@ icon_alignment = 1
 expand_icon = true
 script = ExtResource("3_yo2ig")
 
-[node name="cooldown_bar" type="ProgressBar" parent="." unique_id=105153128]
+[node name="CooldownBar" type="ProgressBar" parent="." unique_id=105153128]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,5 +38,5 @@ value = 50.0
 fill_mode = 3
 show_percentage = false
 
-[node name="cooldown_timer" type="Timer" parent="." unique_id=1243278765]
+[node name="CooldownTimer" type="Timer" parent="." unique_id=1243278765]
 one_shot = true

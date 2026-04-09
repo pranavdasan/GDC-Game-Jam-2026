@@ -8,7 +8,7 @@
 atlas = ExtResource("3_1ltno")
 region = Rect2(0, 0, 32, 32)
 
-[node name="shop_menu" type="CanvasLayer" unique_id=1582675053]
+[node name="ShopMenu" type="CanvasLayer" unique_id=1582675053]
 script = ExtResource("1_1ltno")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1770373465]
@@ -35,7 +35,7 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.8
 theme = ExtResource("1_uj65v")
 
-[node name="title_label" type="Label" parent="PanelContainer/HBoxContainer/Shop" unique_id=661176912]
+[node name="TitleLabel" type="Label" parent="PanelContainer/HBoxContainer/Shop" unique_id=661176912]
 layout_mode = 2
 theme = ExtResource("1_uj65v")
 theme_type_variation = &"title_label"
@@ -47,7 +47,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_uj65v")
 
-[node name="item_icon" type="TextureRect" parent="PanelContainer/HBoxContainer/VBoxContainer" unique_id=1998728694]
+[node name="ItemIcon" type="TextureRect" parent="PanelContainer/HBoxContainer/VBoxContainer" unique_id=1998728694]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -67,7 +67,7 @@ layout_mode = 2
 theme_override_constants/separation = 30
 alignment = 1
 
-[node name="name_label" type="RichTextLabel" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=59417181]
+[node name="NameLabel" type="RichTextLabel" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=59417181]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 theme = ExtResource("1_uj65v")
@@ -78,7 +78,7 @@ fit_content = true
 scroll_active = false
 vertical_alignment = 1
 
-[node name="description_label" type="RichTextLabel" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=217064078]
+[node name="DescriptionLabel" type="RichTextLabel" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=217064078]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 theme = ExtResource("1_uj65v")
@@ -88,7 +88,7 @@ text = "[b]Description:[/b]"
 fit_content = true
 vertical_alignment = 1
 
-[node name="price_label" type="RichTextLabel" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=1908581159]
+[node name="PriceLabel" type="RichTextLabel" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=1908581159]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 theme = ExtResource("1_uj65v")
@@ -98,11 +98,11 @@ text = "[b]Price:[/b]"
 fit_content = true
 vertical_alignment = 1
 
-[node name="buy_button" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=2058382173]
+[node name="BuyButton" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=2058382173]
 layout_mode = 2
 theme = ExtResource("1_uj65v")
 action_mode = 0
 text = "BUY"
 
-[connection signal="button_up" from="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/buy_button" to="." method="_on_buy_button_button_up"]
-[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/buy_button" to="." method="_on_buy_button_pressed"]
+[connection signal="button_up" from="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/BuyButton" to="." method="_on_buy_button_button_up"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/BuyButton" to="." method="_on_buy_button_pressed"]

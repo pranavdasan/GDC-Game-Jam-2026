@@ -1,15 +1,15 @@
 extends CanvasLayer
 
-const ability_shop_button = preload("res://scenes/ability_shop_button.tscn")
-const ability_sheet_pixel_width : int = Global.ability_sheet_pixel_width
+const ABILITY_SHOP_BUTTON = preload("res://scenes/ability_shop_button.tscn")
+const ABILITY_SHEET_PIXEL_WIDTH : int = Global.ABILITY_SHEET_PIXEL_WIDTH
 
-@onready var buy_button : Button = $PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/buy_button
+@onready var BuyButton : Button = $PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/BuyButton
 
 # ability detail nodes
-@onready var name_label : RichTextLabel = $PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/name_label
-@onready var description_label : RichTextLabel = $PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/description_label
-@onready var price_label : RichTextLabel = $PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/price_label
-@onready var item_icon : TextureRect = $PanelContainer/HBoxContainer/VBoxContainer/item_icon
+@onready var NameLabel : RichTextLabel = $PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/NameLabel
+@onready var DescriptionLabel : RichTextLabel = $PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/DescriptionLabel
+@onready var PriceLabel : RichTextLabel = $PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/PriceLabel
+@onready var ItemIcon : TextureRect = $PanelContainer/HBoxContainer/VBoxContainer/ItemIcon
 
 var shop_abilities : Array[Ability]
 var selected_id : int = -1
@@ -19,8 +19,8 @@ func _ready() -> void:
 	#  creates a button for each type of ability
 	#  later i want to change this so then it's randomly generated per shop or smth
 	for ability in Global.abilities:
-		var button = ability_shop_button.instantiate()
-		button.name = ability.ability_name
+		var button = ABILITY_SHOP_BUTTON.instantiate()
+		button.name = "Ability" + ability.ability_name
 		button.text = ability.ability_name
 		$PanelContainer/HBoxContainer/Shop.add_child(button)
 		
@@ -29,17 +29,17 @@ func _ready() -> void:
 		shop_abilities.append(ability)
 	
 	# sets default icons and details to first item
-	name_label.text = "[b]Ability: [/b] " + shop_abilities[0].ability_name
-	description_label.text = "[b]Description: [/b]" + shop_abilities[0].description
-	price_label.text = "[b]Price:[/b] $" + str(shop_abilities[0].price)
+	NameLabel.text = "[b]Ability: [/b] " + shop_abilities[0].ability_name
+	DescriptionLabel.text = "[b]Description: [/b]" + shop_abilities[0].description
+	PriceLabel.text = "[b]Price:[/b] $" + str(shop_abilities[0].price)
 	
 	# sets ability ID for first item
 	selected_id = shop_abilities[0].id
 	
 	# sets image for first item
-	item_icon.texture.region.position = Vector2(
-			shop_abilities[0].id % 8 * ability_sheet_pixel_width,
-			floor(float(shop_abilities[0].id) / 8) * ability_sheet_pixel_width
+	ItemIcon.texture.region.position = Vector2(
+			shop_abilities[0].id % 8 * ABILITY_SHEET_PIXEL_WIDTH,
+			floor(float(shop_abilities[0].id) / 8) * ABILITY_SHEET_PIXEL_WIDTH
 		)
 	# ^^^^^^^^^^^^^^^^^
 	# x position on grid: ability_id % 8
@@ -49,18 +49,18 @@ func _ready() -> void:
 
 func ability_button_pressed(ability_id : int) -> void:
 	# sets details for corresponding ability
-	name_label.text = "[b]Ability: [/b] " + Global.abilities[ability_id].ability_name
-	description_label.text = "[b]Description: [/b]" + Global.abilities[ability_id].description
-	price_label.text = "[b]Price:[/b] $" + str(Global.abilities[ability_id].price)
+	NameLabel.text = "[b]Ability: [/b] " + Global.abilities[ability_id].ability_name
+	DescriptionLabel.text = "[b]Description: [/b]" + Global.abilities[ability_id].description
+	PriceLabel.text = "[b]Price:[/b] $" + str(Global.abilities[ability_id].price)
 	
 	# sets ability ID
 	selected_id = ability_id
 	
 	# sets image for corresponding ability:
 	# see above for how i got these
-	item_icon.texture.region.position = Vector2(
-			ability_id % 8 * ability_sheet_pixel_width,
-			floor(float(ability_id) / 8) * ability_sheet_pixel_width
+	ItemIcon.texture.region.position = Vector2(
+			ability_id % 8 * ABILITY_SHEET_PIXEL_WIDTH,
+			floor(float(ability_id) / 8) * ABILITY_SHEET_PIXEL_WIDTH
 		)
 
 func _on_buy_button_pressed() -> void:
@@ -72,11 +72,11 @@ func _on_buy_button_pressed() -> void:
 		Global.add_owned_ability(selected_ability)
 		
 		# so that player knows they successfully bought
-		buy_button.modulate = Color.GREEN
+		BuyButton.modulate = Color.GREEN
 	else:
 		# so that player knows they did not successfully bought
-		buy_button.modulate = Color.RED
+		BuyButton.modulate = Color.RED
 
 func _on_buy_button_button_up() -> void:
 	# uncolors the buy button when ability is purchased/failed to purchase
-	buy_button.modulate = Color.WHITE
+	BuyButton.modulate = Color.WHITE

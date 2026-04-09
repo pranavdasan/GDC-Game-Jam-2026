@@ -6,9 +6,9 @@
 [ext_resource type="FontFile" uid="uid://nroxnlbsru6q" path="res://assets/fonts/RobotoMono-Bold.ttf" id="4_5pdws"]
 [ext_resource type="Script" uid="uid://0dcakajbp7i" path="res://scripts/hud/ability_hud.gd" id="5_uo2fv"]
 
-[node name="hud" type="CanvasLayer" unique_id=2064421710]
+[node name="Hud" type="CanvasLayer" unique_id=2064421710]
 
-[node name="snow_meter" type="ProgressBar" parent="." unique_id=1931638114]
+[node name="SnowMeter" type="ProgressBar" parent="." unique_id=1931638114]
 custom_minimum_size = Vector2(55, 900)
 offset_left = 1782.0
 offset_top = 90.0
@@ -21,7 +21,7 @@ fill_mode = 3
 show_percentage = false
 script = ExtResource("2_uo2fv")
 
-[node name="snobux_counter" type="RichTextLabel" parent="." unique_id=1068580616]
+[node name="SnobuxCounter" type="RichTextLabel" parent="." unique_id=1068580616]
 custom_minimum_size = Vector2(300, 0)
 offset_left = 50.0
 offset_top = 25.0
@@ -35,7 +35,7 @@ fit_content = true
 autowrap_mode = 0
 script = ExtResource("3_6fi6k")
 
-[node name="ability_hud" type="HBoxContainer" parent="." unique_id=468347915]
+[node name="AbilityHud" type="HBoxContainer" parent="." unique_id=468347915]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0

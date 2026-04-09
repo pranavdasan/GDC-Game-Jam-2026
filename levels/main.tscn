@@ -38,7 +38,7 @@ position_smoothing_enabled = true
 [node name="Shop" parent="." unique_id=1570701424 instance=ExtResource("3_l8qe7")]
 position = Vector2(-235, 41)
 
-[node name="hud" parent="." unique_id=2064421710 instance=ExtResource("4_m1504")]
+[node name="Hud" parent="." unique_id=2064421710 instance=ExtResource("4_m1504")]
 
 [node name="WorldBoundary" parent="." unique_id=875849604 instance=ExtResource("6_5k4jt")]
 position = Vector2(0, 112.5)

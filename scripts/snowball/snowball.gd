@@ -10,20 +10,20 @@ extends RigidBody2D
 
 @export var input_vector : Vector2 = Vector2.ZERO
 
-@onready var collision_shape: CollisionShape2D = $CollisionShape2D
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var CollisionShape: CollisionShape2D = $CollisionShape2D
+@onready var Sprite: Sprite2D = $Sprite2D
 
 var current_radius: float
 @export var original_scale: Vector2
 
 func _ready() -> void:
 	current_radius = base_radius
-	original_scale = sprite.scale
+	original_scale = Sprite.scale
 	
 	Global.set_snow_meter(base_radius / max_radius * 100)
 	
 	# Make sure the 	
-	collision_shape.shape.radius = base_radius
+	CollisionShape.shape.radius = base_radius
 
 	update_scale()
 	# update_mass()
@@ -66,11 +66,11 @@ func update_visual_size(_delta : float) -> void:
 	# update_mass()
 
 func update_collisionShape() -> void:
-	collision_shape.shape.radius = current_radius
+	CollisionShape.shape.radius = current_radius
 
 func update_scale() -> void:
 	var scale_ratio: float = current_radius / base_radius
-	sprite.scale = original_scale * scale_ratio
+	Sprite.scale = original_scale * scale_ratio
 
 func update_mass() -> void:
 	mass = base_mass + (current_radius - base_radius) * mass_growth_multiplier

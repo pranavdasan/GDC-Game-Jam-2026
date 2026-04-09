@@ -1,7 +1,7 @@
 extends HBoxContainer
 
-const ability_hud_button = preload("res://scenes/ability_hud_button.tscn")
-const ability_sheet_pixel_width : int = Global.ability_sheet_pixel_width
+const ABILITY_HUD_BUTTON = preload("res://scenes/ability_hud_button.tscn")
+const ABILITY_SHEET_PIXEL_WIDTH : int = Global.ABILITY_SHEET_PIXEL_WIDTH
 
 signal ability_button_pressed(ability_id : int)
 
@@ -19,22 +19,23 @@ func on_owned_abilities_added() -> void:
 		if created_ability_button_ids.find(ability.id) == -1:
 			created_ability_button_ids.append(ability.id)
 			
-			var ability_button : Button = ability_hud_button.instantiate()
-			# \/ apparently i have to make this a unique reference to this property
-			ability_button.icon = ability_button.icon.duplicate()
+			var AbilityButton : Button = ABILITY_HUD_BUTTON.instantiate()
+			# apparently i have to make this a unique reference to this property
+			AbilityButton.icon = AbilityButton.icon.duplicate()
 			
-			ability_button.name = ability.ability_name
+			AbilityButton.name = "Ability" + ability.ability_name
 			
 			# see shop_menu for what does this mean
-			ability_button.icon.region.position = Vector2(
-				int(ability.id) % 8 * ability_sheet_pixel_width,
-				floor(float(ability.id) / 8) * ability_sheet_pixel_width
+			AbilityButton.icon.region.position = Vector2(
+				int(ability.id) % 8 * ABILITY_SHEET_PIXEL_WIDTH,
+				floor(float(ability.id) / 8) * ABILITY_SHEET_PIXEL_WIDTH
 			)
 			
-			add_child(ability_button)
+			print("i made it")
+			add_child(AbilityButton)
 			
 			# pressed event for every button that passes the ability id (for ability_handler)
-			ability_button.pressed.connect(on_ability_button_pressed.bind(ability.id))
+			AbilityButton.pressed.connect(on_ability_button_pressed.bind(ability.id))
 
 func on_ability_button_pressed(ability_id : int) -> void:
 	ability_button_pressed.emit(ability_id)

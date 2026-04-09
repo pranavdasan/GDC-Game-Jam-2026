@@ -1,7 +1,7 @@
 extends Button
 
-@onready var cooldown_bar : ProgressBar = $cooldown_bar
-@onready var cooldown_timer : Timer = $cooldown_timer
+@onready var cooldown_bar : ProgressBar = $CooldownBar
+@onready var cooldown_timer : Timer = $CooldownTimer
 
 func _process(_delta: float) -> void:
 	# sets cooldown bar to proportional cooldown remaining
