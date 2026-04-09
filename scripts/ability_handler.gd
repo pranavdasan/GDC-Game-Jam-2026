@@ -1,6 +1,9 @@
 extends Node
 
+const dash_speed : float = 1250
+
 @onready var ability_hud : HBoxContainer = get_node("/root/main/hud/ability_hud")
+@onready var snowball : RigidBody2D = get_node("/root/main/Snowball")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -39,7 +42,9 @@ func use_ability(ability_id : int) -> void:
 		# actual code for the ability
 		match ability_id:
 			0:
-				pass
+				if snowball.input_vector != Vector2.ZERO:
+					Global.subtract_snow_meter(5)
+					snowball.apply_central_impulse(snowball.input_vector.normalized() * dash_speed)# * (snowball.get_child(0).scale / snowball.original_scale))
 			1:
 				pass
 			2:

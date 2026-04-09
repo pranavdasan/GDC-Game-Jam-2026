@@ -26,6 +26,9 @@ var abilities : Array[Ability] = [
 
 const ability_sheet_pixel_width : int = 32
 
+const min_snow_meter : float = 0.0
+const max_snow_meter : float = 100.0
+
 signal owned_abilities_added()
 
 signal snobux_changed()
@@ -45,5 +48,11 @@ func set_snobux(value : int) -> void:
 	snobux_changed.emit()
 
 func set_snow_meter(value : float) -> void:
-	snow_meter = value
+	snow_meter = clamp(value, min_snow_meter, max_snow_meter)
 	snow_meter_changed.emit()
+
+func add_snow_meter(value : float) -> void:
+	set_snow_meter(snow_meter + value)
+
+func subtract_snow_meter(value : float) -> void:
+	set_snow_meter(snow_meter - value)

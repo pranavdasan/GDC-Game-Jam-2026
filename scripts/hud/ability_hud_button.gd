@@ -3,7 +3,7 @@ extends Button
 @onready var cooldown_bar : ProgressBar = $cooldown_bar
 @onready var cooldown_timer : Timer = $cooldown_timer
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# sets cooldown bar to proportional cooldown remaining
 	# sets the text of this button to also show time remaining
 	if cooldown_timer.time_left != 0.0:
