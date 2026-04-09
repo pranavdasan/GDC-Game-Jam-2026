@@ -31,7 +31,6 @@ func on_owned_abilities_added() -> void:
 				floor(float(ability.id) / 8) * ABILITY_SHEET_PIXEL_WIDTH
 			)
 			
-			print("i made it")
 			add_child(AbilityButton)
 			
 			# pressed event for every button that passes the ability id (for ability_handler)

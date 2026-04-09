@@ -12,6 +12,14 @@ extends RigidBody2D
 
 @onready var CollisionShape: CollisionShape2D = $CollisionShape2D
 @onready var Sprite: Sprite2D = $Sprite2D
+@onready var RayCast : RayCast2D = $RayCast2D
+
+# which objects are reocgnized as the floor
+# name : type
+var floor_objects = [
+	"WorldBoundary",
+	"TileMapLayer"
+]
 
 var current_radius: float
 @export var original_scale: Vector2
@@ -44,12 +52,14 @@ func handle_movement(delta: float) -> void:
 		apply_central_force(Vector2(input_vector.x * speed,0))
 
 func handle_growth(delta: float) -> void:
-	# Check if snowball fully moving (so not for every button press)
-	if linear_velocity.length() < 100:
-		return
 	
-	# Check if max size is reached
-	if current_radius >= max_radius:
+	
+	# Check if snowball fully moving (so not for every button press) and not exceed max_radius
+	if (
+			linear_velocity.length() < 100
+			or current_radius >= max_radius
+			or not touching_floor()
+		):
 		return
 	
 	var growth_amount: float = speed * growth_rate * delta
@@ -74,6 +84,17 @@ func update_scale() -> void:
 
 func update_mass() -> void:
 	mass = base_mass + (current_radius - base_radius) * mass_growth_multiplier
+
+func touching_floor() -> bool:
+	RayCast.target_position.y = current_radius
+	RayCast.global_rotation = 0
+	
+	var raycast_collider = RayCast.get_collider()
+	
+	if raycast_collider:
+		return floor_objects.find(raycast_collider.name) != -1
+	else:
+		return false
 
 func player_shop_method() -> void:
 	pass

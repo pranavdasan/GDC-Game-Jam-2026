@@ -18,3 +18,8 @@ texture = ExtResource("1_6tw0o")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=655201550]
 shape = SubResource("CircleShape2D_xsgkx")
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1134260681]
+exclude_parent = false
+target_position = Vector2(0, 100)
+collide_with_areas = true
