@@ -35,7 +35,7 @@ func use_ability(ability_id : int) -> void:
 	var ability_button : Button = AbilityHud.get_children()[ability_button_index]
 	
 	# to make sure the ability is not on cooldown
-	if ability_button.cooldown_timer.time_left == 0.0:
+	if ability_button.CooldownTimer.time_left == 0.0:
 		# starts cooldown for that ability
 		ability_button.start_cooldown(ability_id)
 		
