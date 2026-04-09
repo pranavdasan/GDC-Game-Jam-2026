@@ -1,18 +1,18 @@
 extends Button
 
-@onready var cooldown_bar : ProgressBar = $CooldownBar
-@onready var cooldown_timer : Timer = $CooldownTimer
+@onready var CooldownBar : ProgressBar = $CooldownBar
+@onready var CooldownTimer : Timer = $CooldownTimer
 
 func _process(_delta: float) -> void:
 	# sets cooldown bar to proportional cooldown remaining
 	# sets the text of this button to also show time remaining
-	if cooldown_timer.time_left != 0.0:
-		cooldown_bar.value = cooldown_timer.time_left / cooldown_timer.wait_time * 100
-		text = "%.2f" % cooldown_timer.time_left
+	if CooldownTimer.time_left != 0.0:
+		CooldownBar.value = CooldownTimer.time_left / CooldownTimer.wait_time * 100
+		text = "%.2f" % CooldownTimer.time_left
 	else:
-		cooldown_bar.value = 0.0
+		CooldownBar.value = 0.0
 		text = ""
 
 # starts the cooldown timer based on ability cooldown
 func start_cooldown(ability_id : int):	
-	cooldown_timer.start(Global.abilities[ability_id].cooldown)
+	CooldownTimer.start(Global.abilities[ability_id].cooldown)
