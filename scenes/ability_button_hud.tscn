@@ -1,18 +1,18 @@
 [gd_scene format=3 uid="uid://btq74hoijbst6"]
 
-[ext_resource type="Texture2D" uid="uid://cgoehgjdg8xf6" path="res://assets/images/shop/abilities.png" id="1_8a0om"]
-[ext_resource type="Theme" uid="uid://bran1si2ii5s5" path="res://themes/theme.tres" id="1_ua2qj"]
-[ext_resource type="Script" uid="uid://cs0emdmss8cxk" path="res://scripts/hud/ability_hud_button.gd" id="3_yo2ig"]
+[ext_resource type="Theme" uid="uid://bran1si2ii5s5" path="res://themes/theme.tres" id="1_6omji"]
+[ext_resource type="Texture2D" uid="uid://cgoehgjdg8xf6" path="res://assets/images/abilities/abilities.png" id="2_i1oc5"]
+[ext_resource type="Script" uid="uid://cs0emdmss8cxk" path="res://scripts/hud/ability_button_hud.gd" id="3_1h4gc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1dy07"]
-atlas = ExtResource("1_8a0om")
+atlas = ExtResource("2_i1oc5")
 region = Rect2(0, 0, 32, 32)
 
-[node name="AbilityHudButton" type="Button" unique_id=771338579]
+[node name="AbilityButtonHud" type="Button" unique_id=771338579]
 custom_minimum_size = Vector2(128, 128)
 offset_right = 30.0
 offset_bottom = 20.0
-theme = ExtResource("1_ua2qj")
+theme = ExtResource("1_6omji")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 5
@@ -22,7 +22,7 @@ text = "5.0"
 icon = SubResource("AtlasTexture_1dy07")
 icon_alignment = 1
 expand_icon = true
-script = ExtResource("3_yo2ig")
+script = ExtResource("3_1h4gc")
 
 [node name="CooldownBar" type="ProgressBar" parent="." unique_id=105153128]
 layout_mode = 1
@@ -32,7 +32,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme = ExtResource("1_ua2qj")
+theme = ExtResource("1_6omji")
 theme_type_variation = &"cooldown_bar"
 value = 50.0
 fill_mode = 3

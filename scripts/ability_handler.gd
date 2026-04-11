@@ -1,5 +1,7 @@
 extends Node
 
+const GROWTH_RATE : float = 0.02
+const JUMP_FORCE : float = 1250
 const DASH_SPEED : float = 1250
 
 @onready var AbilityHud : HBoxContainer = get_node("/root/main/Hud/AbilityHud")
@@ -30,6 +32,11 @@ func _input(event) -> void:
 				use_ability(ability_id)
 
 func use_ability(ability_id : int) -> void:
+	if Global.snow_meter < Global.abilities[ability_id].snow_cost:
+		return
+	
+	Global.subtract_snow_meter(Global.abilities[ability_id].snow_cost)
+	
 	# gets the real ability button node for used ability
 	var ability_button_index : int = AbilityHud.created_ability_button_ids.find(ability_id)
 	var ability_button : Button = AbilityHud.get_children()[ability_button_index]
@@ -41,11 +48,14 @@ func use_ability(ability_id : int) -> void:
 		
 		# actual code for the ability
 		match ability_id:
-			0:
-				if Snowball.input_vector != Vector2.ZERO:
-					Global.subtract_snow_meter(5)
-					Snowball.apply_central_impulse(Snowball.input_vector.normalized() * DASH_SPEED)# * (Snowball.get_child(0).scale / Snowball.original_scale))
-			1:
-				pass
+			0: # grow
+				pass # passive
+			1: # snow jump
+				Snowball.apply_central_impulse(	Vector2(0, -JUMP_FORCE))
 			2:
 				pass
+			3:
+				pass
+			4: # dash
+				if Snowball.input_vector != Vector2.ZERO:
+					Snowball.apply_central_impulse(	Snowball.input_vector.normalized() * DASH_SPEED)

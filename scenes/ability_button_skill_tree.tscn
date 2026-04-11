@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://jocd7ude5sbl"]
+
+[ext_resource type="Theme" uid="uid://bran1si2ii5s5" path="res://themes/theme.tres" id="1_srs23"]
+[ext_resource type="Texture2D" uid="uid://cgoehgjdg8xf6" path="res://assets/images/abilities/abilities.png" id="2_4poto"]
+[ext_resource type="Script" uid="uid://d3afeugt4nt14" path="res://scripts/skill_tree/ability_button_skill_tree.gd" id="3_ohn6d"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pnux1"]
+atlas = ExtResource("2_4poto")
+region = Rect2(0, 0, 32, 32)
+
+[node name="AbilityButtonSkillTree" type="Button" unique_id=1965888669]
+custom_minimum_size = Vector2(150, 150)
+theme = ExtResource("1_srs23")
+action_mode = 0
+icon = SubResource("AtlasTexture_pnux1")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("3_ohn6d")
+
+[node name="Outline" type="ColorRect" parent="." unique_id=101181387]
+visible = false
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -15.0
+offset_top = -15.0
+offset_right = -15.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.2, 1.2)
+mouse_filter = 2
+color = Color(0.09821427, 0.09821427, 0.09821427, 1)
+
+[connection signal="button_up" from="." to="." method="_on_button_up"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

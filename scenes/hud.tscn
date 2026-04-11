@@ -1,9 +1,7 @@
 [gd_scene format=3 uid="uid://wxd7weptev4l"]
 
 [ext_resource type="Script" uid="uid://cvhtgrnsobvly" path="res://scripts/hud/snow_meter.gd" id="2_uo2fv"]
-[ext_resource type="Script" uid="uid://gbtdpta05jw1" path="res://scripts/hud/snobux_counter.gd" id="3_6fi6k"]
 [ext_resource type="Theme" uid="uid://bran1si2ii5s5" path="res://themes/theme.tres" id="3_047uy"]
-[ext_resource type="FontFile" uid="uid://nroxnlbsru6q" path="res://assets/fonts/RobotoMono-Bold.ttf" id="4_5pdws"]
 [ext_resource type="Script" uid="uid://0dcakajbp7i" path="res://scripts/hud/ability_hud.gd" id="5_uo2fv"]
 
 [node name="Hud" type="CanvasLayer" unique_id=2064421710]
@@ -20,20 +18,6 @@ value = 50.0
 fill_mode = 3
 show_percentage = false
 script = ExtResource("2_uo2fv")
-
-[node name="SnobuxCounter" type="RichTextLabel" parent="." unique_id=1068580616]
-custom_minimum_size = Vector2(300, 0)
-offset_left = 50.0
-offset_top = 25.0
-offset_right = 350.0
-offset_bottom = 92.0
-theme_override_fonts/bold_font = ExtResource("4_5pdws")
-theme_override_font_sizes/bold_font_size = 50
-bbcode_enabled = true
-text = "[b]$50"
-fit_content = true
-autowrap_mode = 0
-script = ExtResource("3_6fi6k")
 
 [node name="AbilityHud" type="HBoxContainer" parent="." unique_id=468347915]
 anchors_preset = 7

@@ -1,0 +1,105 @@
+[gd_scene format=3 uid="uid://dou7gvlvywfc4"]
+
+[ext_resource type="Script" uid="uid://b5l5ub6n44xqr" path="res://scripts/skill_tree/skill_tree.gd" id="1_6awrb"]
+[ext_resource type="Theme" uid="uid://bran1si2ii5s5" path="res://themes/theme.tres" id="2_h52vt"]
+[ext_resource type="FontFile" uid="uid://nroxnlbsru6q" path="res://assets/fonts/RobotoMono-Bold.ttf" id="4_hwd2a"]
+[ext_resource type="Script" uid="uid://gbtdpta05jw1" path="res://scripts/skill_tree/skill_points_counter.gd" id="5_urm3n"]
+[ext_resource type="Script" uid="uid://cnf4s1q6tcla3" path="res://scripts/skill_tree/draw_tool.gd" id="6_dvtuv"]
+
+[node name="SkillTree" type="CanvasLayer" unique_id=1582675053]
+script = ExtResource("1_6awrb")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1770373465]
+z_index = 1
+custom_minimum_size = Vector2(1400, 800)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -700.0
+offset_top = -325.0
+offset_right = 700.0
+offset_bottom = 325.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_h52vt")
+
+[node name="TreeScrollContainer" type="ScrollContainer" parent="PanelContainer" unique_id=1321463666]
+z_index = 1
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="TreeContainer" type="VBoxContainer" parent="PanelContainer/TreeScrollContainer" unique_id=505422508]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_h52vt")
+theme_type_variation = &"skill_tree_layer_box"
+alignment = 1
+
+[node name="SkillPointsCounter" type="RichTextLabel" parent="PanelContainer" unique_id=2144984679]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("2_h52vt")
+theme_type_variation = &"skill_points_counter"
+theme_override_fonts/bold_font = ExtResource("4_hwd2a")
+theme_override_font_sizes/bold_font_size = 50
+bbcode_enabled = true
+text = "[b]50P"
+fit_content = true
+autowrap_mode = 0
+vertical_alignment = 1
+script = ExtResource("5_urm3n")
+
+[node name="DetailsContainer" type="FoldableContainer" parent="PanelContainer" unique_id=1203505884]
+z_index = 2
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme = ExtResource("2_h52vt")
+title = "Ability Details"
+title_alignment = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/DetailsContainer" unique_id=1269198155]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/DetailsContainer/ScrollContainer" unique_id=408727124]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 15
+
+[node name="NameLabel" type="RichTextLabel" parent="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer" unique_id=418901426]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("2_h52vt")
+theme_type_variation = &"description_label"
+bbcode_enabled = true
+text = "[b]Name:[/b]"
+fit_content = true
+
+[node name="CooldownLabel" type="RichTextLabel" parent="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer" unique_id=829153444]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("2_h52vt")
+theme_type_variation = &"description_label"
+bbcode_enabled = true
+text = "[b]Cooldown:[/b]"
+fit_content = true
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer" unique_id=944941027]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("2_h52vt")
+theme_type_variation = &"description_label"
+bbcode_enabled = true
+text = "[b]Description:[/b]"
+fit_content = true
+
+[node name="DrawTool" type="Control" parent="PanelContainer" unique_id=1886923247]
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("6_dvtuv")

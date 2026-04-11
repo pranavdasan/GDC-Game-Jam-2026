@@ -1,7 +1,7 @@
 extends RigidBody2D
 
 @export var speed: float = 50000
-@export var growth_rate: float = 0.01
+@export var growth_rate: float = AbilityHandler.GROWTH_RATE
 @export var max_radius: float = 120.0
 
 @export var base_radius: float = 19.0
@@ -46,14 +46,18 @@ func handle_movement(delta: float) -> void:
 	input_vector.x = Input.get_axis("move_left", "move_right")
 	input_vector.y = Input.get_axis("move_up", "move_down")
 	
-	handle_growth(delta)
+	if Global.is_ability_owned(0):
+		handle_growth(delta)
 	
 	if input_vector != Vector2.ZERO:
 		apply_central_force(Vector2(input_vector.x * speed,0))
 
+func _input(event) -> void:
+	if event.is_action_pressed("move_up"):
+		if touching_floor() and Global.is_ability_owned(1):
+			AbilityHandler.use_ability(1)
+
 func handle_growth(delta: float) -> void:
-	
-	
 	# Check if snowball fully moving (so not for every button press) and not exceed max_radius
 	if (
 			linear_velocity.length() < 100
