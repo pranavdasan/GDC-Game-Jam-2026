@@ -17,19 +17,33 @@ func on_ability_button_pressed(ability_id : int) -> void:
 func _input(event) -> void:
 	# checks that pressed key is a number key 0-9
 	if event is InputEventKey and event.pressed:
-		if event.keycode >= KEY_0 and event.keycode <= KEY_9:
-			# this is the int version of key pressed
-			var ability_button_index : int = event.keycode - KEY_0
-			
-			# if it's zero it's actually 10 (the tenth number key)
-			if ability_button_index == 0:
-				ability_button_index = 10
-			
-			# checks that this button actually has a created ability
-			if ability_button_index <= AbilityHud.created_ability_button_ids.size():
-				# finds the ability id of this created ability button
-				var ability_id : int = AbilityHud.created_ability_button_ids[ability_button_index - 1]
-				use_ability(ability_id)
+		
+		match event.keycode:
+			KEY_Z:
+				use_ability(AbilityHud.created_ability_button_ids[0])
+			KEY_X:
+				use_ability(AbilityHud.created_ability_button_ids[1])
+			KEY_C:
+				use_ability(AbilityHud.created_ability_button_ids[2])
+			KEY_V:
+				use_ability(AbilityHud.created_ability_button_ids[3])
+			KEY_B:
+				use_ability(AbilityHud.created_ability_button_ids[4])
+		
+		# \/ this is for arrow keys \/
+		#if event.keycode >= KEY_0 and event.keycode <= KEY_9:
+			## this is the int version of key pressed
+			#var ability_button_index : int = event.keycode - KEY_0
+			#
+			## if it's zero it's actually 10 (the tenth number key)
+			#if ability_button_index == 0:
+				#ability_button_index = 10
+			#
+			## checks that this button actually has a created ability
+			#if ability_button_index <= AbilityHud.created_ability_button_ids.size():
+				## finds the ability id of this created ability button
+				#var ability_id : int = AbilityHud.created_ability_button_ids[ability_button_index - 1]
+				#use_ability(ability_id)
 
 func use_ability(ability_id : int) -> void:
 	if Global.snow_meter < Global.abilities[ability_id].snow_cost:
@@ -51,11 +65,16 @@ func use_ability(ability_id : int) -> void:
 			0: # grow
 				pass # passive
 			1: # snow jump
-				Snowball.apply_central_impulse(	Vector2(0, -JUMP_FORCE))
+				if Snowball.touching_floor():
+					Snowball.apply_central_impulse(	Vector2(0, -JUMP_FORCE))
+				else:
+					Global.add_snow_meter(Global.abilities[ability_id].snow_cost)
 			2:
 				pass
 			3:
 				pass
 			4: # dash
 				if Snowball.input_vector != Vector2.ZERO:
-					Snowball.apply_central_impulse(	Snowball.input_vector.normalized() * DASH_SPEED)
+					Snowball.apply_central_impulse(Snowball.input_vector.normalized() * DASH_SPEED)
+	else:
+		Global.add_snow_meter(Global.abilities[ability_id].snow_cost)

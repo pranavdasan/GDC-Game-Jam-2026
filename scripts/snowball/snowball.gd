@@ -54,7 +54,7 @@ func handle_movement(delta: float) -> void:
 
 func _input(event) -> void:
 	if event.is_action_pressed("move_up"):
-		if touching_floor() and Global.is_ability_owned(1):
+		if Global.is_ability_owned(1):
 			AbilityHandler.use_ability(1)
 
 func handle_growth(delta: float) -> void:
@@ -97,8 +97,5 @@ func touching_floor() -> bool:
 	
 	if raycast_collider:
 		return floor_objects.find(raycast_collider.name) != -1
-	else:
-		return false
-
-func player_shop_method() -> void:
-	pass
+	
+	return false
