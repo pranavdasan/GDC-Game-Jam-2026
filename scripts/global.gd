@@ -48,16 +48,13 @@ signal owned_abilities_added()
 signal skill_points_changed()
 signal snow_meter_changed()
 
-# which objects are reocgnized as the floor
-var floor_objects : Array = [
-	get_node("/Main/WorldBoundary"),
-	get_node("/Main/TileMapLayer")
-]
-
 var owned_abilities : Array[Ability]
 
 var skill_points : int = 200
 var snow_meter : float = 0.0
+
+func _ready() -> void:
+	pass
 
 func is_ability_owned(ability_id : int) -> bool:
 	for ability in owned_abilities:

@@ -15,6 +15,7 @@ extends Node
 @onready var Outline : ColorRect = $Outline
 
 func _ready() -> void:
+	# the first button is focused by default
 	if ability_id == 0:
 		self.visible = true
 		
@@ -30,6 +31,7 @@ func _on_pressed() -> void:
 	else:
 		buy_ability()
 
+## focuses on called AbilityButton's details, setting all labels to the respective ability's details
 func focus_details() -> void:
 	SkillTree.reset_ability_button_focus()
 	focused = true
@@ -43,7 +45,8 @@ func focus_details() -> void:
 		CooldownLabel.text = "[b]Cooldown: [/b]" + str(Global.abilities[ability_id].cooldown) + " seconds"
 	DescriptionLabel.text = "[b]Description: [/b]" + Global.abilities[ability_id].description
 
-func buy_ability() -> void:	
+## checks if ability is able to be bought, and buys the ability + modulates the button accordingly
+func buy_ability() -> void:
 	if Global.skill_points >= 1 and not Global.is_ability_owned(ability_id):
 		owned = true
 		
@@ -60,6 +63,7 @@ func _on_button_up() -> void:
 	
 	self.modulate = Color.WHITE
 
+## upgrades the respective ability button's ability level (cooldown, damage, etc)
 func upgrade() -> void:
 	upgrade_level += 1
 

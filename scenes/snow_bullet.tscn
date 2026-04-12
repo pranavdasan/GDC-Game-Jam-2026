@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://drgwgsywkyq73" path="res://assets/images/abilities/snow_bullet.png" id="1_xr1yx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6hdsr"]
-size = Vector2(701, 197)
+size = Vector2(38, 13)
 
 [node name="SnowBullet" type="RigidBody2D" unique_id=1094645642]
 gravity_scale = 0.0
@@ -14,9 +14,10 @@ script = ExtResource("1_6hdsr")
 scale = Vector2(3.5, 3.5)
 texture = ExtResource("1_xr1yx")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=853842560]
-position = Vector2(0.5, 51.5)
-shape = SubResource("RectangleShape2D_6hdsr")
-disabled = true
+[node name="Area2D" type="Area2D" parent="." unique_id=1451016767]
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=853842560]
+position = Vector2(-2, 3.5)
+shape = SubResource("RectangleShape2D_6hdsr")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

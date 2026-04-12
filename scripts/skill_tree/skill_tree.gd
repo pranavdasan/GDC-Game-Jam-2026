@@ -6,12 +6,14 @@ const AbilityButtonSkillTree = preload("res://scenes/ability_button_skill_tree.t
 @onready var TreeContainer : VBoxContainer = $PanelContainer/TreeScrollContainer/TreeContainer
 @onready var TreeScrollContainer : ScrollContainer = $PanelContainer/TreeScrollContainer
 
+# WHENEVER YOU WANT TO ADD A NEW ABILITY TO SHOP, INSTANTIATE IT HERE AND THEN:
 var AbilityButtonZero : Button = AbilityButtonSkillTree.instantiate()
 var AbilityButtonOne : Button = AbilityButtonSkillTree.instantiate()
 var AbilityButtonTwo : Button = AbilityButtonSkillTree.instantiate()
 var AbilityButtonThree : Button = AbilityButtonSkillTree.instantiate()
 var AbilityButtonFour : Button = AbilityButtonSkillTree.instantiate()
 
+# ADD IT TO THIS LIST
 var ability_buttons = [
 	AbilityButtonZero,
 	AbilityButtonOne,
@@ -31,6 +33,7 @@ var tree_structure : Dictionary[Button, Dictionary] = {
 	}
 }
 
+# list of all the connections that need to be drawn in the skill tree
 @export var tree_position_connections : Array[Array]
 
 func _ready() -> void:
@@ -60,9 +63,11 @@ func _input(event) -> void:
 		
 		visible = not visible
 
+# recursive function that generates formatted boxes for trees
 func generate_tree_structure(ParentButton : Button, current_layer : int, current_layer_dict : Dictionary):
 	var LayerBox : HBoxContainer
 	
+	# creates a new HBoxContainer "layer" if it doesn't already exist
 	if TreeContainer.find_child("Layer" + str(current_layer)) == null:
 		LayerBox = HBoxContainer.new()
 		LayerBox.alignment = BoxContainer.ALIGNMENT_CENTER
@@ -74,11 +79,14 @@ func generate_tree_structure(ParentButton : Button, current_layer : int, current
 	else:
 		LayerBox = TreeContainer.find_child("Layer" + str(current_layer))
 	
+	# makes a button for each child button of the one that called this function
+	# and makes each child node call this function setting itself as the parent node (recursive)
 	for ability_button_index in current_layer_dict.keys().size():
 		var ChildButton : Button = current_layer_dict.keys()[ability_button_index]
 		
 		LayerBox.add_child(ChildButton)
 		
+		# the first layer has no parent so there's not always parent button
 		if ParentButton:
 			ChildButton.parent_button = ParentButton
 		
@@ -95,6 +103,7 @@ func reset_tree_connections() -> void:
 			var parent_relative_position : Vector2 = ParentAbilityButton.global_position - TreeScrollContainer.global_position
 			var child_relative_position : Vector2 = AbilityButton.global_position - TreeScrollContainer.global_position
 			
+			# if the parent or child is out of view, then don't draw this connection
 			if (
 				not AbilityButton.visible or
 				child_relative_position.y > TreeScrollContainer.size.y or 
@@ -102,11 +111,13 @@ func reset_tree_connections() -> void:
 			):
 				continue
 			
+			# add connection of the CENTER of each button (since godot tracks from top left)
 			tree_position_connections.append([
 				parent_relative_position + ParentAbilityButton.size / 2,
 				child_relative_position + AbilityButton.size / 2
 			])
 
+# sets all ability buttons' focus to false
 func reset_ability_button_focus() -> void:
 	for AbilityButton : Button in ability_buttons:
 		AbilityButton.focused = false

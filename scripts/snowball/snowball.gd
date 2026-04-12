@@ -18,8 +18,6 @@ const BASE_PIXEL_RADIUS : int = 700
 @onready var Sprite: Sprite2D = $Sprite2D
 @onready var RayCast : RayCast2D = $RayCast2D
 
-var floor_objects : Array = Global.floor_objects
-
 var current_radius: float
 @export var original_scale: Vector2
 
@@ -36,12 +34,17 @@ func _ready() -> void:
 	# update_mass()
 
 func _physics_process(delta: float) -> void:
-	RayCast.target_position = Vector2(0, BASE_PIXEL_RADIUS * Sprite.scale.length() / 2)
+	RayCast.target_position = Vector2(0, BASE_PIXEL_RADIUS * Sprite.scale.length() / 2 + 2)
 	RayCast.global_rotation = 0
 	
 	handle_movement(delta)
 	
 	update_visual_size(delta)
+
+func _input(event) -> void:
+	if event.is_action_pressed("move_up"):
+		if Global.is_ability_owned(1):
+			AbilityHandler.use_ability(1)
 
 func handle_movement(delta: float) -> void:
 	input_vector = Vector2.ZERO
@@ -57,11 +60,6 @@ func handle_movement(delta: float) -> void:
 	if input_vector != Vector2.ZERO:
 		apply_central_force(Vector2(input_vector.x * speed,0))
 
-func _input(event) -> void:
-	if event.is_action_pressed("move_up"):
-		if Global.is_ability_owned(1):
-			AbilityHandler.use_ability(1)
-
 func handle_growth(delta: float) -> void:
 	# Check if snowball fully moving (so not for every button press) and not exceed max_radius
 	if (
@@ -69,7 +67,7 @@ func handle_growth(delta: float) -> void:
 			or current_radius >= max_radius
 			or not touching_floor()
 		):
-		return
+			return
 	
 	var growth_amount: float = speed * growth_rate * delta
 	Global.add_snow_meter(growth_amount / max_radius * 100)
@@ -98,6 +96,6 @@ func touching_floor() -> bool:
 	var raycast_collider = RayCast.get_collider()
 	
 	if raycast_collider:
-		return floor_objects.find(raycast_collider) != -1
+		return get_tree().get_nodes_in_group("floor").find(raycast_collider)  == -1
 	
 	return false

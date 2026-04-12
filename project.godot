@@ -38,6 +38,11 @@ movie_writer/movie_file="C:/Pranav Items/Godot Projects/gdc-game/showcase_vid.av
 
 enabled=PackedStringArray()
 
+[global_group]
+
+enemies=""
+terrain=""
+
 [input]
 
 move_up={

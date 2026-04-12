@@ -2,7 +2,7 @@ extends Node
 
 const GROWTH_RATE : float = 0.02
 const JUMP_FORCE : float = 1250
-const BULLET_SPEED : float = 1500
+const BULLET_SPEED : float = 15000
 const DASH_SPEED : float = 1250
 
 const SnowBullet = preload("res://scenes/snow_bullet.tscn")
@@ -20,9 +20,8 @@ func on_ability_button_pressed(ability_id : int) -> void:
 	use_ability(ability_id)
 
 func _input(event) -> void:
-	# checks that pressed key is a number key 0-9
 	if event is InputEventKey and event.pressed:
-		
+		#z through b keys are used, so that mouse is not used like hollow knight
 		match event.keycode:
 			KEY_Z:
 				use_ability(AbilityHud.created_ability_button_ids[0])
@@ -50,23 +49,25 @@ func _input(event) -> void:
 				#var ability_id : int = AbilityHud.created_ability_button_ids[ability_button_index - 1]
 				#use_ability(ability_id)
 
+## checks if ability is able to be used (snow cost and cooldown) and uses respective ability
 func use_ability(ability_id : int) -> void:
 	# gets the real ability button node for used ability
 	var ability_button_index : int = AbilityHud.created_ability_button_ids.find(ability_id)
-	var ability_button : Button = AbilityHud.get_children()[ability_button_index]
+	var AbilityButton : Button = AbilityHud.get_children()[ability_button_index]
 	
 	# to make sure there is enough snow AND that the ability is not on cooldown
-	if Global.snow_meter < Global.abilities[ability_id].snow_cost or ability_button.CooldownTimer.time_left != 0.0:
+	if Global.snow_meter < Global.abilities[ability_id].snow_cost or AbilityButton.CooldownTimer.time_left != 0.0:
 		return
 	
 	# for snow jump
 	if ability_id == 1 and not Snowball.touching_floor():
 		return
 	
+	#subtracts the cost of the ability from snow meter
 	Global.subtract_snow_meter(Global.abilities[ability_id].snow_cost)
 	
 	# starts cooldown for that ability
-	ability_button.start_cooldown(ability_id)
+	AbilityButton.start_cooldown(ability_id)
 	
 	# actual code for the ability
 	match ability_id:
@@ -81,9 +82,11 @@ func use_ability(ability_id : int) -> void:
 		4: # dash
 			dash_ability(Snowball.last_input_vector.normalized())
 
+## applies jump force to snowball in up direction
 func jump_ability() -> void:
-	Snowball.apply_central_impulse(Vector2(0, -JUMP_FORCE))
+	Snowball.apply_central_impulse(Vector2.UP * JUMP_FORCE)
 
+## instantiates a snow bullet with direction of [param direction] and constant force
 func snow_bullet_ability(direction : Vector2) -> void:
 	var SnowBulletInstance : RigidBody2D = SnowBullet.instantiate()
 	SnowBulletInstance.position = Snowball.position
@@ -91,6 +94,6 @@ func snow_bullet_ability(direction : Vector2) -> void:
 	SnowBulletInstance.constant_force = direction * BULLET_SPEED
 	Main.add_child(SnowBulletInstance)
 
+## applies force to snowball in direction of [param direction]
 func dash_ability(direction : Vector2) -> void:
 	Snowball.apply_central_impulse(direction * DASH_SPEED)
-	
