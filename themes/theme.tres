@@ -2,29 +2,33 @@
 
 [ext_resource type="FontFile" uid="uid://d3jf0md4t4o00" path="res://assets/fonts/RobotoMono-Regular.ttf" id="1_kgv31"]
 [ext_resource type="StyleBox" uid="uid://drggxp8lmplme" path="res://themes/styles/button/hover.tres" id="2_a8t2u"]
+[ext_resource type="StyleBox" uid="uid://drocfgfx1yrl0" path="res://themes/styles/button/disabled.tres" id="2_id4dl"]
 [ext_resource type="StyleBox" uid="uid://ihdyorkr8os8" path="res://themes/styles/panel_container/style_box_flat.tres" id="3_2hrgd"]
 [ext_resource type="StyleBox" uid="uid://e5ppky0xtkmk" path="res://themes/styles/button/primary.tres" id="3_k0q7g"]
 [ext_resource type="StyleBox" uid="uid://5ctmtdnqerp3" path="res://themes/styles/button/pressed.tres" id="4_j33s6"]
 [ext_resource type="StyleBox" uid="uid://j8321cdgqekm" path="res://themes/styles/progress_bar/background.tres" id="6_8gf3l"]
 [ext_resource type="StyleBox" uid="uid://b1u16wopu2xws" path="res://themes/styles/foldable_container/hover_title_panel.tres" id="6_rqeco"]
 [ext_resource type="StyleBox" uid="uid://bssebwf2xowcb" path="res://themes/styles/progress_bar/fill.tres" id="7_0jcxo"]
+[ext_resource type="StyleBox" uid="uid://bbd1e4i701u7e" path="res://themes/styles/foldable_container/panel.tres" id="7_id4dl"]
 [ext_resource type="FontFile" uid="uid://nroxnlbsru6q" path="res://assets/fonts/RobotoMono-Bold.ttf" id="7_j33s6"]
 [ext_resource type="StyleBox" uid="uid://dgawsx7dq6qj2" path="res://themes/styles/foldable_container/title_panel.tres" id="7_rqeco"]
 [ext_resource type="StyleBox" uid="uid://b03ehu5nvpj5b" path="res://themes/styles/progress_bar/cooldown_bar/style_box_empty.tres" id="8_0jcxo"]
 [ext_resource type="StyleBox" uid="uid://ctgots2u82akk" path="res://themes/styles/progress_bar/cooldown_bar/style_box_flat.tres" id="9_nxnlh"]
 [ext_resource type="StyleBox" uid="uid://bxpuwcys0x06j" path="res://themes/styles/snow_meter/style_box_flat.tres" id="10_nxnlh"]
 [ext_resource type="StyleBox" uid="uid://cwm3f4038unh5" path="res://themes/styles/skill_points_counter/style_box_flat.tres" id="11_nxnlh"]
-[ext_resource type="StyleBox" uid="uid://bis46tr28yd6w" path="res://themes/styles/scroll_container/style_box_empty.tres" id="11_viyyk"]
 
 [resource]
-Button/colors/font_color = Color(0.09320194, 0.0955437, 0.10491073, 1)
+Button/colors/font_color = Color(0.105882354, 0.101960786, 0.101960786, 1)
+Button/colors/font_disabled_color = Color(0.13171524, 0.122607686, 0.11350011, 1)
 Button/font_sizes/font_size = 20
 Button/fonts/font = ExtResource("1_kgv31")
+Button/styles/disabled = ExtResource("2_id4dl")
 Button/styles/hover = ExtResource("2_a8t2u")
 Button/styles/normal = ExtResource("3_k0q7g")
 Button/styles/pressed = ExtResource("4_j33s6")
 FoldableContainer/font_sizes/font_size = 30
 FoldableContainer/fonts/font = ExtResource("7_j33s6")
+FoldableContainer/styles/panel = ExtResource("7_id4dl")
 FoldableContainer/styles/title_collapsed_hover_panel = ExtResource("6_rqeco")
 FoldableContainer/styles/title_collapsed_panel = ExtResource("7_rqeco")
 FoldableContainer/styles/title_hover_panel = ExtResource("6_rqeco")
@@ -33,7 +37,6 @@ HBoxContainer/constants/separation = 20
 PanelContainer/styles/panel = ExtResource("3_2hrgd")
 ProgressBar/styles/background = ExtResource("6_8gf3l")
 ProgressBar/styles/fill = ExtResource("7_0jcxo")
-ScrollContainer/styles/panel = ExtResource("11_viyyk")
 VBoxContainer/constants/separation = 20
 cooldown_bar/base_type = &"ProgressBar"
 cooldown_bar/styles/background = ExtResource("8_0jcxo")

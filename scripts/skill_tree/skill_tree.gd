@@ -14,7 +14,7 @@ var AbilityButtonThree : Button = AbilityButtonSkillTree.instantiate()
 var AbilityButtonFour : Button = AbilityButtonSkillTree.instantiate()
 
 # ADD IT TO THIS LIST
-var ability_buttons = [
+@export var ability_buttons = [
 	AbilityButtonZero,
 	AbilityButtonOne,
 	AbilityButtonTwo,
@@ -33,8 +33,12 @@ var tree_structure : Dictionary[Button, Dictionary] = {
 	}
 }
 
+signal focus_changed()
+
 # list of all the connections that need to be drawn in the skill tree
 @export var tree_position_connections : Array[Array]
+
+@export var focused_ability_id : int
 
 func _ready() -> void:
 	visible = false
@@ -119,6 +123,8 @@ func reset_tree_connections() -> void:
 
 # sets all ability buttons' focus to false
 func reset_ability_button_focus() -> void:
+	focus_changed.emit()
+	
 	for AbilityButton : Button in ability_buttons:
 		AbilityButton.focused = false
 		AbilityButton.get_child(0).visible = false

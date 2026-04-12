@@ -1,40 +1,52 @@
 extends Node
 
+# format:
+# id
+# ability_name
+# description
+# cooldown (0.0 means passive)
+# snow_cost
+# upgradable
 var abilities : Array[Ability] = [
 	Ability.new(
+		0,
 		"Grow",
 		"Allows the user to replenish snow by rolling around",
 		0.0,
 		0.0,
-		0
+		false
 	),
 	Ability.new(
+		1,
 		"Snow Jump",
 		"Allows the user to launch upwards from the ground at the cost of some snow",
 		0.0,
 		4.0,
-		1
+		false
 	),
 	Ability.new(
+		2,
 		"Snow Bullet",
 		"Fires a projectile made of snow in the direction of the uesr's movement",
 		0.25,
 		2.0,
-		2
+		true
 	),
 	Ability.new(
+		3,
 		"Snow Jetpack",
 		"Boost upwards at a high speed at the cost of some snow",
 		2.0,
 		15.0,
-		3
+		true
 	),
 	Ability.new(
+		4,
 		"Dash",
 		"Allows the user to rapidly move in a certain direction at the cost of some snow",
 		1.0,
 		6.0,
-		4
+		true
 	)
 ]
 

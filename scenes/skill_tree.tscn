@@ -3,8 +3,10 @@
 [ext_resource type="Script" uid="uid://b5l5ub6n44xqr" path="res://scripts/skill_tree/skill_tree.gd" id="1_6awrb"]
 [ext_resource type="Theme" uid="uid://bran1si2ii5s5" path="res://themes/theme.tres" id="2_h52vt"]
 [ext_resource type="FontFile" uid="uid://nroxnlbsru6q" path="res://assets/fonts/RobotoMono-Bold.ttf" id="4_hwd2a"]
+[ext_resource type="Script" uid="uid://c6q2xvc6jsg23" path="res://scripts/skill_tree/buy_button.gd" id="5_6awrb"]
 [ext_resource type="Script" uid="uid://gbtdpta05jw1" path="res://scripts/skill_tree/skill_points_counter.gd" id="5_urm3n"]
 [ext_resource type="Script" uid="uid://cnf4s1q6tcla3" path="res://scripts/skill_tree/draw_tool.gd" id="6_dvtuv"]
+[ext_resource type="Script" uid="uid://imttpnu8bcsk" path="res://scripts/skill_tree/upgrade_button.gd" id="7_h52vt"]
 
 [node name="SkillTree" type="CanvasLayer" unique_id=1582675053]
 script = ExtResource("1_6awrb")
@@ -24,6 +26,11 @@ offset_bottom = 325.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_h52vt")
+
+[node name="DrawTool" type="Control" parent="PanelContainer" unique_id=1886923247]
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("6_dvtuv")
 
 [node name="TreeScrollContainer" type="ScrollContainer" parent="PanelContainer" unique_id=1321463666]
 z_index = 1
@@ -77,6 +84,27 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 15
 
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer" unique_id=592835644]
+layout_mode = 2
+alignment = 1
+
+[node name="BuyButton" type="Button" parent="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1927376356]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+theme = ExtResource("2_h52vt")
+action_mode = 0
+text = "BUY"
+script = ExtResource("5_6awrb")
+
+[node name="UpgradeButton" type="Button" parent="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1384994580]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+theme = ExtResource("2_h52vt")
+disabled = true
+action_mode = 0
+text = "UPGRADE"
+script = ExtResource("7_h52vt")
+
 [node name="NameLabel" type="RichTextLabel" parent="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer" unique_id=418901426]
 layout_mode = 2
 size_flags_vertical = 4
@@ -103,8 +131,9 @@ theme_type_variation = &"description_label"
 bbcode_enabled = true
 text = "[b]Description:[/b]"
 fit_content = true
+scroll_active = false
 
-[node name="DrawTool" type="Control" parent="PanelContainer" unique_id=1886923247]
-layout_mode = 2
-mouse_filter = 2
-script = ExtResource("6_dvtuv")
+[connection signal="button_up" from="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer/HBoxContainer/BuyButton" to="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer/HBoxContainer/BuyButton" method="_on_button_up"]
+[connection signal="pressed" from="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer/HBoxContainer/BuyButton" to="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer/HBoxContainer/BuyButton" method="_on_pressed"]
+[connection signal="button_up" from="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer/HBoxContainer/UpgradeButton" to="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer/HBoxContainer/UpgradeButton" method="_on_button_up"]
+[connection signal="pressed" from="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer/HBoxContainer/UpgradeButton" to="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer/HBoxContainer/UpgradeButton" method="_on_pressed"]

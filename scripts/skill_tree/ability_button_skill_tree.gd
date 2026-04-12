@@ -1,7 +1,6 @@
 extends Node
 
 @export var focused : bool = false
-@export var owned : bool = false
 @export var ability_id : int
 @export var upgrade_level : int = 0
 @export var parent_button : Button = null
@@ -28,11 +27,10 @@ func _ready() -> void:
 func _on_pressed() -> void:
 	if not focused:
 		focus_details()
-	else:
-		buy_ability()
 
 ## focuses on called AbilityButton's details, setting all labels to the respective ability's details
 func focus_details() -> void:
+	SkillTree.focused_ability_id = ability_id
 	SkillTree.reset_ability_button_focus()
 	focused = true
 	
@@ -45,29 +43,12 @@ func focus_details() -> void:
 		CooldownLabel.text = "[b]Cooldown: [/b]" + str(Global.abilities[ability_id].cooldown) + " seconds"
 	DescriptionLabel.text = "[b]Description: [/b]" + Global.abilities[ability_id].description
 
-## checks if ability is able to be bought, and buys the ability + modulates the button accordingly
-func buy_ability() -> void:
-	if Global.skill_points >= 1 and not Global.is_ability_owned(ability_id):
-		owned = true
-		
-		Global.subtract_skill_points(1)
-		Global.add_owned_ability(ability_id)
-		
-		# so that player knows they successfully bought
-		self.modulate = Color.GREEN
-	else:
-		self.modulate = Color.RED
-
-func _on_button_up() -> void:
-	await get_tree().create_timer(0.5).timeout
-	
-	self.modulate = Color.WHITE
-
 ## upgrades the respective ability button's ability level (cooldown, damage, etc)
 func upgrade() -> void:
 	upgrade_level += 1
 
+## every time a new ability is bought, checks if its parent has been bought and if so becomes visible
 func on_owned_abilities_added():
 	if parent_button:
-		if parent_button.owned:
+		if Global.is_ability_owned(parent_button.ability_id):
 			self.visible = true
