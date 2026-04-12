@@ -20,6 +20,7 @@ var ability_buttons = [
 	AbilityButtonFour
 ]
 
+# \/ EDIT THIS DICT HERE FOR ADDING/REMOVING TREE ITEMS \/
 var tree_structure : Dictionary[Button, Dictionary] = {
 	AbilityButtonZero : {
 		AbilityButtonOne : {
@@ -31,7 +32,6 @@ var tree_structure : Dictionary[Button, Dictionary] = {
 }
 
 @export var tree_position_connections : Array[Array]
-var layer_index : int = -1
 
 func _ready() -> void:
 	visible = false
@@ -49,24 +49,30 @@ func _ready() -> void:
 				floor(float(AbilityButton.ability_id) / 8) * ABILITY_SHEET_PIXEL_WIDTH
 			)
 	
-	generate_tree_structure(null, tree_structure)
+	generate_tree_structure(null, 0, tree_structure)
+
+func _process(_delta : float) -> void:
+	reset_tree_connections()
 
 func _input(event) -> void:
 	if event.is_action_pressed("open_skill_tree"):
-		redraw_tree_connections()
+		reset_tree_connections()
 		
 		visible = not visible
 
-func generate_tree_structure(ParentButton, current_layer_dict : Dictionary):
-	layer_index += 1
+func generate_tree_structure(ParentButton : Button, current_layer : int, current_layer_dict : Dictionary):
+	var LayerBox : HBoxContainer
 	
-	var LayerBox : HBoxContainer = HBoxContainer.new()
-	LayerBox.alignment = BoxContainer.ALIGNMENT_CENTER
-	LayerBox.theme = load("res://themes/theme.tres")
-	LayerBox.theme_type_variation = "skill_tree_layer_box"
-	LayerBox.name = "Layer" + str(layer_index)
-	
-	TreeContainer.add_child(LayerBox)
+	if TreeContainer.find_child("Layer" + str(current_layer)) == null:
+		LayerBox = HBoxContainer.new()
+		LayerBox.alignment = BoxContainer.ALIGNMENT_CENTER
+		LayerBox.theme = load("res://themes/theme.tres")
+		LayerBox.theme_type_variation = "skill_tree_layer_box"
+		LayerBox.name = "Layer" + str(current_layer)
+		
+		TreeContainer.add_child(LayerBox)
+	else:
+		LayerBox = TreeContainer.find_child("Layer" + str(current_layer))
 	
 	for ability_button_index in current_layer_dict.keys().size():
 		var ChildButton : Button = current_layer_dict.keys()[ability_button_index]
@@ -76,23 +82,25 @@ func generate_tree_structure(ParentButton, current_layer_dict : Dictionary):
 		if ParentButton:
 			ChildButton.parent_button = ParentButton
 		
-		generate_tree_structure(ChildButton, current_layer_dict.values()[ability_button_index])
+		generate_tree_structure(ChildButton, current_layer + 1, current_layer_dict.values()[ability_button_index])
 
-func redraw_tree_connections() -> void:
+func reset_tree_connections() -> void:
 	tree_position_connections.clear()
 	
 	for AbilityButton in ability_buttons:
-		await get_tree().physics_frame
-		
-		if not AbilityButton.visible:
-			continue
-		
 		var ParentAbilityButton = AbilityButton.parent_button
 		
 		if ParentAbilityButton:
 			# relative to TreeScrollContainer
 			var parent_relative_position : Vector2 = ParentAbilityButton.global_position - TreeScrollContainer.global_position
 			var child_relative_position : Vector2 = AbilityButton.global_position - TreeScrollContainer.global_position
+			
+			if (
+				not AbilityButton.visible or
+				child_relative_position.y > TreeScrollContainer.size.y or 
+				parent_relative_position.y < 0
+			):
+				continue
 			
 			tree_position_connections.append([
 				parent_relative_position + ParentAbilityButton.size / 2,
@@ -105,4 +113,4 @@ func reset_ability_button_focus() -> void:
 		AbilityButton.get_child(0).visible = false
 
 func on_owned_abilities_added() -> void:
-	redraw_tree_connections()
+	reset_tree_connections()

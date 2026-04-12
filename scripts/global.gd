@@ -12,14 +12,14 @@ var abilities : Array[Ability] = [
 		"Snow Jump",
 		"Allows the user to launch upwards from the ground at the cost of some snow",
 		0.0,
-		2.5,
+		4.0,
 		1
 	),
 	Ability.new(
-		"Snow Gun",
-		"Shoots some snow towards the mouse at the cost of some snow",
-		3.0,
-		10.0,
+		"Snow Bullet",
+		"Fires a projectile made of snow in the direction of the uesr's movement",
+		0.25,
+		2.0,
 		2
 	),
 	Ability.new(
@@ -47,6 +47,12 @@ signal owned_abilities_added()
 
 signal skill_points_changed()
 signal snow_meter_changed()
+
+# which objects are reocgnized as the floor
+var floor_objects : Array = [
+	get_node("/Main/WorldBoundary"),
+	get_node("/Main/TileMapLayer")
+]
 
 var owned_abilities : Array[Ability]
 

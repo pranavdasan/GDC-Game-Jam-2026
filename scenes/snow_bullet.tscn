@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://7kyn0fdv46fa"]
+
+[ext_resource type="Script" uid="uid://ce1cbnd7pvbcl" path="res://scripts/snow_bullet/snow_bullet.gd" id="1_6hdsr"]
+[ext_resource type="Texture2D" uid="uid://drgwgsywkyq73" path="res://assets/images/abilities/snow_bullet.png" id="1_xr1yx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6hdsr"]
+size = Vector2(701, 197)
+
+[node name="SnowBullet" type="RigidBody2D" unique_id=1094645642]
+gravity_scale = 0.0
+script = ExtResource("1_6hdsr")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=858803341]
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("1_xr1yx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=853842560]
+position = Vector2(0.5, 51.5)
+shape = SubResource("RectangleShape2D_6hdsr")
+disabled = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

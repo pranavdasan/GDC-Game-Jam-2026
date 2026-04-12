@@ -56,6 +56,8 @@ func buy_ability() -> void:
 		self.modulate = Color.RED
 
 func _on_button_up() -> void:
+	await get_tree().create_timer(0.5).timeout
+	
 	self.modulate = Color.WHITE
 
 func upgrade() -> void:

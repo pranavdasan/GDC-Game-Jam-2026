@@ -2,10 +2,15 @@ extends Node
 
 const GROWTH_RATE : float = 0.02
 const JUMP_FORCE : float = 1250
+const BULLET_SPEED : float = 1500
 const DASH_SPEED : float = 1250
 
-@onready var AbilityHud : HBoxContainer = get_node("/root/main/Hud/AbilityHud")
-@onready var Snowball : RigidBody2D = get_node("/root/main/Snowball")
+const SnowBullet = preload("res://scenes/snow_bullet.tscn")
+
+@onready var Main : Node2D = get_node("/root/Main")
+
+@onready var AbilityHud : HBoxContainer = get_node("/root/Main/Hud/AbilityHud")
+@onready var Snowball : RigidBody2D = get_node("/root/Main/Snowball")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -46,35 +51,46 @@ func _input(event) -> void:
 				#use_ability(ability_id)
 
 func use_ability(ability_id : int) -> void:
-	if Global.snow_meter < Global.abilities[ability_id].snow_cost:
-		return
-	
-	Global.subtract_snow_meter(Global.abilities[ability_id].snow_cost)
-	
 	# gets the real ability button node for used ability
 	var ability_button_index : int = AbilityHud.created_ability_button_ids.find(ability_id)
 	var ability_button : Button = AbilityHud.get_children()[ability_button_index]
 	
-	# to make sure the ability is not on cooldown
-	if ability_button.CooldownTimer.time_left == 0.0:
-		# starts cooldown for that ability
-		ability_button.start_cooldown(ability_id)
-		
-		# actual code for the ability
-		match ability_id:
-			0: # grow
-				pass # passive
-			1: # snow jump
-				if Snowball.touching_floor():
-					Snowball.apply_central_impulse(	Vector2(0, -JUMP_FORCE))
-				else:
-					Global.add_snow_meter(Global.abilities[ability_id].snow_cost)
-			2:
-				pass
-			3:
-				pass
-			4: # dash
-				if Snowball.input_vector != Vector2.ZERO:
-					Snowball.apply_central_impulse(Snowball.input_vector.normalized() * DASH_SPEED)
-	else:
-		Global.add_snow_meter(Global.abilities[ability_id].snow_cost)
+	# to make sure there is enough snow AND that the ability is not on cooldown
+	if Global.snow_meter < Global.abilities[ability_id].snow_cost or ability_button.CooldownTimer.time_left != 0.0:
+		return
+	
+	# for snow jump
+	if ability_id == 1 and not Snowball.touching_floor():
+		return
+	
+	Global.subtract_snow_meter(Global.abilities[ability_id].snow_cost)
+	
+	# starts cooldown for that ability
+	ability_button.start_cooldown(ability_id)
+	
+	# actual code for the ability
+	match ability_id:
+		0: # grow
+			pass # passive
+		1: # snow jump
+			jump_ability()
+		2:
+			snow_bullet_ability(Snowball.last_input_vector.normalized())
+		3:
+			pass
+		4: # dash
+			dash_ability(Snowball.last_input_vector.normalized())
+
+func jump_ability() -> void:
+	Snowball.apply_central_impulse(Vector2(0, -JUMP_FORCE))
+
+func snow_bullet_ability(direction : Vector2) -> void:
+	var SnowBulletInstance : RigidBody2D = SnowBullet.instantiate()
+	SnowBulletInstance.position = Snowball.position
+	SnowBulletInstance.rotation = direction.angle()
+	SnowBulletInstance.constant_force = direction * BULLET_SPEED
+	Main.add_child(SnowBulletInstance)
+
+func dash_ability(direction : Vector2) -> void:
+	Snowball.apply_central_impulse(direction * DASH_SPEED)
+	

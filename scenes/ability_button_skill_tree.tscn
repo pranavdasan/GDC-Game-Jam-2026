@@ -9,6 +9,7 @@ atlas = ExtResource("2_4poto")
 region = Rect2(0, 0, 32, 32)
 
 [node name="AbilityButtonSkillTree" type="Button" unique_id=1965888669]
+z_index = 2
 custom_minimum_size = Vector2(150, 150)
 theme = ExtResource("1_srs23")
 action_mode = 0
@@ -18,8 +19,8 @@ expand_icon = true
 script = ExtResource("3_ohn6d")
 
 [node name="Outline" type="ColorRect" parent="." unique_id=101181387]
-visible = false
-z_index = -1
+z_index = 1
+z_as_relative = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,7 +33,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.2, 1.2)
 mouse_filter = 2
-color = Color(0.09821427, 0.09821427, 0.09821427, 1)
+color = Color(0.12946427, 0.12946427, 0.12946427, 1)
 
 [connection signal="button_up" from="." to="." method="_on_button_up"]
 [connection signal="pressed" from="." to="." method="_on_pressed"]

@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bdx66lu38ywr" path="res://scenes/snowball.tscn" id="1_2262g"]
 [ext_resource type="PackedScene" uid="uid://bxt5jq41arpqr" path="res://scenes/ability_handler.tscn" id="1_ifaiv"]
 [ext_resource type="Texture2D" uid="uid://dbav4gaw8uehp" path="res://assets/images/tilemaps/snow_ground.png" id="2_wdj6m"]
-[ext_resource type="PackedScene" path="res://scenes/skill_tree.tscn" id="4_5k4jt"]
+[ext_resource type="PackedScene" uid="uid://dou7gvlvywfc4" path="res://scenes/skill_tree.tscn" id="4_5k4jt"]
 [ext_resource type="PackedScene" uid="uid://wxd7weptev4l" path="res://scenes/hud.tscn" id="4_m1504"]
 [ext_resource type="PackedScene" uid="uid://bqe4b4i6kscsm" path="res://scenes/world_boundary.tscn" id="6_5k4jt"]
 
@@ -18,7 +18,7 @@ tile_size = Vector2i(225, 225)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_wdj6m")
 
-[node name="main" type="Node2D" unique_id=1138941841]
+[node name="Main" type="Node2D" unique_id=1138941841]
 
 [node name="AbilityHandler" parent="." unique_id=1548632360 instance=ExtResource("1_ifaiv")]
 
