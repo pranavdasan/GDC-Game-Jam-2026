@@ -2,7 +2,6 @@ extends Node
 
 @export var focused : bool = false
 @export var ability_id : int
-@export var upgrade_level : int = 0
 @export var parent_button : Button = null
 
 @onready var SkillTree : CanvasLayer = $"../../../../.."
@@ -12,6 +11,7 @@ extends Node
 @onready var DescriptionLabel : RichTextLabel = $"../../../../DetailsContainer/ScrollContainer/VBoxContainer/DescriptionLabel"
 
 @onready var Outline : ColorRect = $Outline
+@onready var Lock : TextureRect = $Lock
 
 func _ready() -> void:
 	# the first button is focused by default
@@ -36,19 +36,18 @@ func focus_details() -> void:
 	
 	Outline.visible = true
 	
-	NameLabel.text = "[b]Name: [/b]" + Global.abilities[ability_id].ability_name
-	if Global.abilities[ability_id].cooldown == 0:
+	NameLabel.text = "[b]Name: [/b]" + Global.get_ability(ability_id).ability_name
+	if Global.get_ability(ability_id).cooldown == 0:
 		CooldownLabel.text = "[b]Cooldown: [/b]Passive Ability"
 	else:
-		CooldownLabel.text = "[b]Cooldown: [/b]" + str(Global.abilities[ability_id].cooldown) + " seconds"
-	DescriptionLabel.text = "[b]Description: [/b]" + Global.abilities[ability_id].description
+		CooldownLabel.text = "[b]Cooldown: [/b]" + str(Global.get_ability(ability_id).cooldown) + " seconds"
+	DescriptionLabel.text = "[b]Description: [/b]" + Global.get_ability(ability_id).description
 
-## upgrades the respective ability button's ability level (cooldown, damage, etc)
-func upgrade() -> void:
-	upgrade_level += 1
-
-## every time a new ability is bought, checks if its parent has been bought and if so becomes visible
+## every time a new ability is bought: checks if its parent has been bought and if so becomes visible, checks if itself is bought and if so makes lock invisible
 func on_owned_abilities_added():
 	if parent_button:
-		if Global.is_ability_owned(parent_button.ability_id):
+		if Global.get_ability(parent_button.ability_id).owned:
 			self.visible = true
+	
+	if Global.get_ability(ability_id).owned:
+		Lock.visible = false

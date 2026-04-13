@@ -13,10 +13,12 @@ func _ready() -> void:
 	Global.owned_abilities_added.connect(on_owned_abilities_added)
 
 func on_owned_abilities_added() -> void:
-	# creates a new button for each unowned ability
-	for ability in Global.owned_abilities:
-		#makes sure that a button for this ability id has not already been created
-		if created_ability_button_ids.find(ability.id) == -1:
+	for ability in Global.abilities:
+		# makes sure that:
+		# a button for this ability id has not already been created
+		# ability is owned
+		# ability is not passive
+		if created_ability_button_ids.find(ability.id) == -1 and ability.owned and ability.cooldown != 0.0:
 			created_ability_button_ids.append(ability.id)
 			
 			var AbilityButton : Button = ABILITY_HUD_BUTTON.instantiate()

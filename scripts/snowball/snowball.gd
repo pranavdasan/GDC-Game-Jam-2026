@@ -27,7 +27,7 @@ func _ready() -> void:
 	
 	Global.set_snow_meter(base_radius / max_radius * 100)
 	
-	# Make sure the 	
+	# Make sure the
 	CollisionShape.shape.radius = base_radius
 
 	update_scale()
@@ -43,7 +43,7 @@ func _physics_process(delta: float) -> void:
 
 func _input(event) -> void:
 	if event.is_action_pressed("move_up"):
-		if Global.is_ability_owned(1):
+		if Global.get_ability(1).owned:
 			AbilityHandler.use_ability(1)
 
 func handle_movement(delta: float) -> void:
@@ -54,7 +54,7 @@ func handle_movement(delta: float) -> void:
 	if input_vector != Vector2.ZERO:
 		last_input_vector = input_vector
 	
-	if Global.is_ability_owned(0):
+	if Global.get_ability(0).owned:
 		handle_growth(delta)
 	
 	if input_vector != Vector2.ZERO:

@@ -7,10 +7,15 @@ const AbilityButtonSkillTree = preload("res://scenes/ability_button_skill_tree.t
 @onready var TreeScrollContainer : ScrollContainer = $PanelContainer/TreeScrollContainer
 
 # WHENEVER YOU WANT TO ADD A NEW ABILITY TO SHOP, INSTANTIATE IT HERE AND THEN:
+## grow ability
 var AbilityButtonZero : Button = AbilityButtonSkillTree.instantiate()
+## jump ability
 var AbilityButtonOne : Button = AbilityButtonSkillTree.instantiate()
+## snow bullet
 var AbilityButtonTwo : Button = AbilityButtonSkillTree.instantiate()
+## snow jetpack
 var AbilityButtonThree : Button = AbilityButtonSkillTree.instantiate()
+## dash
 var AbilityButtonFour : Button = AbilityButtonSkillTree.instantiate()
 
 # ADD IT TO THIS LIST

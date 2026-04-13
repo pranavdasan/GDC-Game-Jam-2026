@@ -91,6 +91,7 @@ alignment = 1
 [node name="BuyButton" type="Button" parent="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1927376356]
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
+size_flags_horizontal = 3
 theme = ExtResource("2_h52vt")
 action_mode = 0
 text = "BUY"
@@ -99,6 +100,7 @@ script = ExtResource("5_6awrb")
 [node name="UpgradeButton" type="Button" parent="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1384994580]
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
+size_flags_horizontal = 3
 theme = ExtResource("2_h52vt")
 disabled = true
 action_mode = 0

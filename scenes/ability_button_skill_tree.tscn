@@ -3,6 +3,7 @@
 [ext_resource type="Theme" uid="uid://bran1si2ii5s5" path="res://themes/theme.tres" id="1_srs23"]
 [ext_resource type="Texture2D" uid="uid://cgoehgjdg8xf6" path="res://assets/images/abilities/abilities.png" id="2_4poto"]
 [ext_resource type="Script" uid="uid://d3afeugt4nt14" path="res://scripts/skill_tree/ability_button_skill_tree.gd" id="3_ohn6d"]
+[ext_resource type="Texture2D" uid="uid://tkmx2sqnasua" path="res://assets/images/abilities/lock.png" id="4_4poto"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pnux1"]
 atlas = ExtResource("2_4poto")
@@ -11,6 +12,8 @@ region = Rect2(0, 0, 32, 32)
 [node name="AbilityButtonSkillTree" type="Button" unique_id=1965888669]
 z_index = 2
 custom_minimum_size = Vector2(150, 150)
+offset_right = 150.0
+offset_bottom = 150.0
 theme = ExtResource("1_srs23")
 action_mode = 0
 icon = SubResource("AtlasTexture_pnux1")
@@ -35,5 +38,16 @@ scale = Vector2(1.2, 1.2)
 mouse_filter = 2
 color = Color(0.12946427, 0.12946427, 0.12946427, 1)
 
-[connection signal="button_up" from="." to="." method="_on_button_up"]
+[node name="Lock" type="TextureRect" parent="." unique_id=2095137109]
+z_index = 3
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 150.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+texture = ExtResource("4_4poto")
+expand_mode = 3
+stretch_mode = 5
+
 [connection signal="pressed" from="." to="." method="_on_pressed"]

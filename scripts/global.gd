@@ -60,25 +60,18 @@ signal owned_abilities_added()
 signal skill_points_changed()
 signal snow_meter_changed()
 
-var owned_abilities : Array[Ability]
-
-var skill_points : int = 200
+var skill_points : int = 10
 var snow_meter : float = 0.0
 
-func _ready() -> void:
-	pass
+# ability functions
+func get_ability(ability_id : int) -> Ability:
+	return abilities[ability_id]
 
-func is_ability_owned(ability_id : int) -> bool:
-	for ability in owned_abilities:
-		if ability.id == ability_id:
-			return true
-	
-	return false
-
-func add_owned_ability(ability_id : int) -> void:
-	owned_abilities.append(abilities[ability_id])
+func unlock_ability(ability_id : int) -> void:
+	abilities[ability_id].owned = true
 	owned_abilities_added.emit()
 
+# skill point functions
 func set_skill_points(value : int) -> void:
 	skill_points = value
 	skill_points_changed.emit()
@@ -89,6 +82,7 @@ func add_skill_points(value : int) -> void:
 func subtract_skill_points(value : int) -> void:
 	set_skill_points(skill_points - value)
 
+# snow meter functions
 func set_snow_meter(value : float) -> void:
 	snow_meter = clamp(value, MIN_SNOW_METER, MAX_SNOW_METER)
 	snow_meter_changed.emit()

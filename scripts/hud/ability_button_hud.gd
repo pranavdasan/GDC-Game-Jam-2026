@@ -15,4 +15,4 @@ func _process(_delta: float) -> void:
 
 # starts the cooldown timer based on ability cooldown
 func start_cooldown(ability_id : int):	
-	CooldownTimer.start(Global.abilities[ability_id].cooldown)
+	CooldownTimer.start(Global.get_ability(ability_id).cooldown)

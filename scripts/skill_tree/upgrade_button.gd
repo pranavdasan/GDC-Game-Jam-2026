@@ -13,7 +13,7 @@ func _on_button_up() -> void:
 	pass
 
 func refresh_status() -> void:
-	if Global.is_ability_owned(SkillTree.focused_ability_id) and Global.abilities[SkillTree.focused_ability_id].upgradable:
+	if Global.get_ability(SkillTree.focused_ability_id).owned and Global.get_ability(SkillTree.focused_ability_id).upgradable:
 		disabled = false
 	else:
 		disabled = true
