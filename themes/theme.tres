@@ -18,6 +18,7 @@
 [ext_resource type="StyleBox" uid="uid://cwm3f4038unh5" path="res://themes/styles/skill_points_counter/style_box_flat.tres" id="11_nxnlh"]
 [ext_resource type="StyleBox" uid="uid://bis46tr28yd6w" path="res://themes/styles/scroll_container/style_box_empty.tres" id="13_oi4s6"]
 [ext_resource type="StyleBox" uid="uid://ykgkkpkdiwho" path="res://themes/styles/ability_level_bar/fill.tres" id="13_w3cml"]
+[ext_resource type="StyleBox" uid="uid://c6ce3vccemau6" path="res://themes/styles/ability_level_bar/backgroudn.tres" id="14_imp4c"]
 
 [resource]
 Button/colors/font_color = Color(0.105882354, 0.101960786, 0.101960786, 1)
@@ -42,6 +43,7 @@ ProgressBar/styles/fill = ExtResource("7_0jcxo")
 ScrollContainer/styles/panel = ExtResource("13_oi4s6")
 VBoxContainer/constants/separation = 20
 ability_level_bar/base_type = &"ProgressBar"
+ability_level_bar/styles/background = ExtResource("14_imp4c")
 ability_level_bar/styles/fill = ExtResource("13_w3cml")
 cooldown_bar/base_type = &"ProgressBar"
 cooldown_bar/styles/background = ExtResource("8_0jcxo")

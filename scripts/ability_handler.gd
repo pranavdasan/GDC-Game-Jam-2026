@@ -1,11 +1,42 @@
 extends Node
 
+# 0 grow
 const BASE_GROWTH_RATE : float = 0.02
 const GROWTH_RATE_UPGRADE_MULT : float = 0.005
+
+var current_growth_rate : float = BASE_GROWTH_RATE
+
+
+# 1 snow jump
 const BASE_JUMP_FORCE : float = 400.0
 const JUMP_FORCE_UPGRADE_MULT : float = 100.0
-const BULLET_SPEED : float = 15000
-const DASH_SPEED : float = 1250
+
+var current_jump_force : float = BASE_JUMP_FORCE
+
+
+# 2 snow bullet
+const BULLET_SPEED : float = 15000.0
+
+const BASE_BULLET_DAMAGE : float = 5.0
+const BULLET_DAMAGE_UPGRADE_MULT : float = 1.0
+
+const BASE_BULLET_COOLDOWN : float = 0.25
+const BULLET_COOLDOWN_UPGRADE_MULT : float = 0.025
+
+var current_bullet_damage : float = BASE_BULLET_DAMAGE
+var current_bullet_cooldown : float = BASE_BULLET_COOLDOWN
+
+
+# 4 dash
+const BASE_DASH_SPEED : float = 300
+const DASH_SPEED_UPGRADE_MULT : float = 230
+
+const BASE_DASH_COOLDOWN : float = 1.0
+const DASH_COOLDOWN_UPGRADE_MULT : = 0.05
+
+var current_dash_speed : float = BASE_DASH_SPEED
+var current_dash_cooldown : float = BASE_DASH_COOLDOWN
+
 
 const SnowBullet = preload("res://scenes/snow_bullet.tscn")
 
@@ -84,9 +115,27 @@ func use_ability(ability_id : int) -> void:
 		4: # dash
 			dash_ability(Snowball.last_input_vector.normalized())
 
+## sets all ablity properties to their levels according to current ability level
+func update_ability_values() -> void:
+	# 0 grow
+	current_growth_rate = BASE_GROWTH_RATE + GROWTH_RATE_UPGRADE_MULT * Global.get_ability(0).ability_level
+	
+	# 1 jump
+	current_jump_force = BASE_JUMP_FORCE + JUMP_FORCE_UPGRADE_MULT * Global.get_ability(1).ability_level
+	
+	# 2 bullet
+	current_bullet_damage = BASE_BULLET_DAMAGE + BULLET_DAMAGE_UPGRADE_MULT * Global.get_ability(2).ability_level
+	current_bullet_cooldown = BASE_BULLET_COOLDOWN + BULLET_COOLDOWN_UPGRADE_MULT * Global.get_ability(2).ability_level
+	Global.get_ability(2).set_ability_cooldown(current_bullet_cooldown)
+	
+	# 4 dash
+	current_dash_speed = BASE_DASH_SPEED + DASH_SPEED_UPGRADE_MULT * Global.get_ability(4).ability_level
+	current_dash_cooldown = BASE_DASH_COOLDOWN + DASH_COOLDOWN_UPGRADE_MULT * Global.get_ability(4).ability_level
+	Global.get_ability(4).set_ability_cooldown(current_dash_cooldown)
+
 ## applies jump force to snowball in up direction
 func jump_ability() -> void:
-	Snowball.apply_central_impulse(Vector2.UP * BASE_JUMP_FORCE - Vector2(0, JUMP_FORCE_UPGRADE_MULT * Global.get_ability(1).ability_level))
+	Snowball.apply_central_impulse(Vector2.UP * current_jump_force)
 
 ## instantiates a snow bullet with direction of [param direction] and constant force
 func snow_bullet_ability(starting_velocity: Vector2, direction : Vector2) -> void:
@@ -99,4 +148,4 @@ func snow_bullet_ability(starting_velocity: Vector2, direction : Vector2) -> voi
 
 ## applies force to snowball in direction of [param direction]
 func dash_ability(direction : Vector2) -> void:
-	Snowball.apply_central_impulse(direction * DASH_SPEED)
+	Snowball.apply_central_impulse(direction * current_dash_speed)

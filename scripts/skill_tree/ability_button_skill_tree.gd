@@ -7,6 +7,7 @@ extends Node
 @onready var SkillTree : CanvasLayer = $"../../../../.."
 
 @onready var AbilityLevelBar : ProgressBar = $"../../../../DetailsContainer/ScrollContainer/VBoxContainer/AbilityLevelBar"
+@onready var AbilityLevelLabel : Label = $"../../../../DetailsContainer/ScrollContainer/VBoxContainer/AbilityLevelBar/AbilityLevelLabel"
 
 @onready var NameLabel : RichTextLabel = $"../../../../DetailsContainer/ScrollContainer/VBoxContainer/NameLabel"
 @onready var CooldownLabel : RichTextLabel = $"../../../../DetailsContainer/ScrollContainer/VBoxContainer/CooldownLabel"
@@ -43,6 +44,10 @@ func focus_details() -> void:
 	var FocusedAbility : Ability = Global.get_ability(ability_id)
 	
 	AbilityLevelBar.value = FocusedAbility.ability_level
+	if FocusedAbility.upgradable:
+		AbilityLevelLabel.text = "ABILITY LEVEL: " + str(FocusedAbility.ability_level)
+	else:
+		AbilityLevelLabel.text = "NOT UPGRADEABLE"
 	
 	NameLabel.text = "[b]Name: [/b]" + FocusedAbility.ability_name
 	if Global.get_ability(ability_id).cooldown == 0:
@@ -55,11 +60,13 @@ func focus_details() -> void:
 	else:
 		match FocusedAbility.id:
 			0:
-				FocusedAbility.set_upgrade_description(AbilityHandler.BASE_GROWTH_RATE + AbilityHandler.GROWTH_RATE_UPGRADE_MULT * FocusedAbility.ability_level)
+				FocusedAbility.set_upgrade_description(AbilityHandler.current_growth_rate)
 			1:
-				FocusedAbility.set_upgrade_description(AbilityHandler.BASE_JUMP_FORCE + AbilityHandler.JUMP_FORCE_UPGRADE_MULT * FocusedAbility.ability_level)
+				FocusedAbility.set_upgrade_description(AbilityHandler.current_jump_force)
 			2:
-				FocusedAbility.set_upgrade_description(Global.get_ability(2).cooldown, 5.0)
+				FocusedAbility.set_upgrade_description(AbilityHandler.current_bullet_cooldown, AbilityHandler.current_bullet_damage)
+			4:
+				FocusedAbility.set_upgrade_description(AbilityHandler.current_dash_cooldown, AbilityHandler.current_dash_speed)
 		
 		UpgradeDescriptionLabel.text = "[b]When Upgraded:[/b]" + FocusedAbility.upgrade_description
 

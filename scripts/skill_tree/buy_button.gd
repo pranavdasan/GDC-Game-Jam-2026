@@ -7,7 +7,7 @@ func _ready() -> void:
 	Global.owned_abilities_added.connect(refresh_status)
 
 func _on_pressed() -> void:
-	Global.subtract_skill_points(1)
+	Global.subtract_skill_points(5)
 	Global.unlock_ability(SkillTree.focused_ability_id)
 	
 	# so that player knows they successfully bought
@@ -23,7 +23,7 @@ func refresh_status() -> void:
 	
 	if (
 		not FocusedAbility.owned and
-		Global.skill_points >= 1
+		Global.skill_points >= 5
 	):
 		disabled = false
 	else:

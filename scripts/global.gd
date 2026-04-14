@@ -4,7 +4,6 @@ extends Node
 # id
 # ability_name
 # description
-# upgrade description
 # cooldown (0.0 means passive)
 # snow_cost
 # upgradable
@@ -29,7 +28,7 @@ var abilities : Array[Ability] = [
 		2,
 		"Snow Bullet",
 		"Fires a projectile made of snow in the direction of the uesr's movement",
-		0.25,
+		AbilityHandler.BASE_BULLET_COOLDOWN,
 		2.0,
 		true
 	),
@@ -45,7 +44,7 @@ var abilities : Array[Ability] = [
 		4,
 		"Dash",
 		"Allows the user to rapidly move in a certain direction at the cost of some snow",
-		1.0,
+		AbilityHandler.BASE_DASH_COOLDOWN,
 		6.0,
 		true
 	)
@@ -82,7 +81,8 @@ var snow_meter : float = 0.0
 func _ready() -> void:
 	abilities[0].set_upgrade_description(AbilityHandler.BASE_GROWTH_RATE)
 	abilities[1].set_upgrade_description(AbilityHandler.BASE_JUMP_FORCE)
-	abilities[2].set_upgrade_description(abilities[2].cooldown, 5.0)
+	abilities[2].set_upgrade_description(abilities[2].cooldown, AbilityHandler.BASE_BULLET_DAMAGE)
+	abilities[4].set_upgrade_description(abilities[4].cooldown, AbilityHandler.BASE_DASH_SPEED)
 
 # essential functions
 func die() -> void:

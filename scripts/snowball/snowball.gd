@@ -3,8 +3,6 @@ extends RigidBody2D
 const BASE_PIXEL_RADIUS : int = 700
 
 @export var speed: float = 50000
-@export var growth_rate: float = AbilityHandler.BASE_GROWTH_RATE
-@export var growth_rate_upgrade_mult : float = AbilityHandler.GROWTH_RATE_UPGRADE_MULT
 @export var max_radius: float = 120.0
 
 @export var base_radius: float = 19.0
@@ -70,7 +68,7 @@ func handle_growth(delta: float) -> void:
 		):
 			return
 	
-	var growth_amount: float = speed * growth_rate * delta + growth_rate_upgrade_mult * Global.get_ability(0).ability_level
+	var growth_amount: float = speed * AbilityHandler.current_growth_rate * delta
 	Global.add_snow_meter(growth_amount / max_radius * 100)
 
 func update_visual_size(_delta : float) -> void:

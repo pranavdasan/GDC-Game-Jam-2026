@@ -16,8 +16,6 @@ func _on_pressed() -> void:
 		Global.subtract_skill_points(1)
 		
 		self.modulate = Color.GREEN
-	else:
-		self.modulate = Color.RED
 
 func _on_button_up() -> void:
 	await get_tree().create_timer(Global.BUTTON_MODULATE_WAIT_TIME).timeout
@@ -30,7 +28,8 @@ func refresh_status() -> void:
 	if (
 		FocusedAbility.owned and
 		FocusedAbility.upgradable and
-		FocusedAbility.ability_level < MAX_UPGRADE_LEVEL
+		FocusedAbility.ability_level < MAX_UPGRADE_LEVEL and
+		Global.skill_points >= 1
 	):
 		disabled = false
 	else:
