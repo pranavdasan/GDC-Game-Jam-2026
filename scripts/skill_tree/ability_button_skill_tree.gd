@@ -11,6 +11,7 @@ extends Node
 @onready var NameLabel : RichTextLabel = $"../../../../DetailsContainer/ScrollContainer/VBoxContainer/NameLabel"
 @onready var CooldownLabel : RichTextLabel = $"../../../../DetailsContainer/ScrollContainer/VBoxContainer/CooldownLabel"
 @onready var DescriptionLabel : RichTextLabel = $"../../../../DetailsContainer/ScrollContainer/VBoxContainer/DescriptionLabel"
+@onready var UpgradeDescriptionLabel : RichTextLabel = $"../../../../DetailsContainer/ScrollContainer/VBoxContainer/UpgradeDescriptionLabel"
 
 @onready var Outline : ColorRect = $Outline
 @onready var Lock : TextureRect = $Lock
@@ -25,6 +26,7 @@ func _ready() -> void:
 		self.visible = false
 	
 	Global.owned_abilities_added.connect(on_owned_abilities_added)
+	Global.ability_upgraded.connect(on_ability_upgraded)
 
 func _on_pressed() -> void:
 	if not focused:
@@ -34,16 +36,32 @@ func _on_pressed() -> void:
 func focus_details() -> void:
 	SkillTree.focused_ability_id = ability_id
 	SkillTree.reset_ability_button_focus()
-	focused = true
 	
+	focused = true
 	Outline.visible = true
 	
-	NameLabel.text = "[b]Name: [/b]" + Global.get_ability(ability_id).ability_name
+	var FocusedAbility : Ability = Global.get_ability(ability_id)
+	
+	AbilityLevelBar.value = FocusedAbility.ability_level
+	
+	NameLabel.text = "[b]Name: [/b]" + FocusedAbility.ability_name
 	if Global.get_ability(ability_id).cooldown == 0:
 		CooldownLabel.text = "[b]Cooldown: [/b]Passive Ability"
 	else:
-		CooldownLabel.text = "[b]Cooldown: [/b]" + str(Global.get_ability(ability_id).cooldown) + " seconds"
-	DescriptionLabel.text = "[b]Description: [/b]" + Global.get_ability(ability_id).description
+		CooldownLabel.text = "[b]Cooldown: [/b]" + str(FocusedAbility.cooldown) + " seconds"
+	DescriptionLabel.text = "[b]Description: [/b]" + FocusedAbility.description
+	if not FocusedAbility.upgradable or FocusedAbility.upgrade_description == "":
+		UpgradeDescriptionLabel.text = "[b]When Upgraded:[/b] NOT UPGRADABLE"
+	else:
+		match FocusedAbility.id:
+			0:
+				FocusedAbility.set_upgrade_description(AbilityHandler.BASE_GROWTH_RATE + AbilityHandler.GROWTH_RATE_UPGRADE_MULT * FocusedAbility.ability_level)
+			1:
+				FocusedAbility.set_upgrade_description(AbilityHandler.BASE_JUMP_FORCE + AbilityHandler.JUMP_FORCE_UPGRADE_MULT * FocusedAbility.ability_level)
+			2:
+				FocusedAbility.set_upgrade_description(Global.get_ability(2).cooldown, 5.0)
+		
+		UpgradeDescriptionLabel.text = "[b]When Upgraded:[/b]" + FocusedAbility.upgrade_description
 
 ## every time a new ability is bought: checks if its parent has been bought and if so becomes visible, checks if itself is bought and if so makes lock invisible
 func on_owned_abilities_added():
@@ -53,3 +71,7 @@ func on_owned_abilities_added():
 	
 	if Global.get_ability(ability_id).owned:
 		Lock.visible = false
+
+func on_ability_upgraded():
+	if focused:
+		focus_details()

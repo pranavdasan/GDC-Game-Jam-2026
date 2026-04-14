@@ -16,6 +16,7 @@
 [ext_resource type="StyleBox" uid="uid://ctgots2u82akk" path="res://themes/styles/progress_bar/cooldown_bar/style_box_flat.tres" id="9_nxnlh"]
 [ext_resource type="StyleBox" uid="uid://bxpuwcys0x06j" path="res://themes/styles/snow_meter/style_box_flat.tres" id="10_nxnlh"]
 [ext_resource type="StyleBox" uid="uid://cwm3f4038unh5" path="res://themes/styles/skill_points_counter/style_box_flat.tres" id="11_nxnlh"]
+[ext_resource type="StyleBox" uid="uid://bis46tr28yd6w" path="res://themes/styles/scroll_container/style_box_empty.tres" id="13_oi4s6"]
 [ext_resource type="StyleBox" uid="uid://ykgkkpkdiwho" path="res://themes/styles/ability_level_bar/fill.tres" id="13_w3cml"]
 
 [resource]
@@ -38,6 +39,7 @@ HBoxContainer/constants/separation = 20
 PanelContainer/styles/panel = ExtResource("3_2hrgd")
 ProgressBar/styles/background = ExtResource("6_8gf3l")
 ProgressBar/styles/fill = ExtResource("7_0jcxo")
+ScrollContainer/styles/panel = ExtResource("13_oi4s6")
 VBoxContainer/constants/separation = 20
 ability_level_bar/base_type = &"ProgressBar"
 ability_level_bar/styles/fill = ExtResource("13_w3cml")
@@ -49,6 +51,10 @@ description_label/font_sizes/bold_font_size = 22
 description_label/font_sizes/normal_font_size = 22
 description_label/fonts/bold_font = ExtResource("7_j33s6")
 description_label/fonts/normal_font = ExtResource("1_kgv31")
+keybind_label/base_type = &"Label"
+keybind_label/colors/font_color = Color(0.17775077, 0.17259412, 0.16485912, 1)
+keybind_label/font_sizes/font_size = 35
+keybind_label/fonts/font = ExtResource("7_j33s6")
 skill_points_counter/base_type = &"RichTextLabel"
 skill_points_counter/styles/normal = ExtResource("11_nxnlh")
 skill_tree_layer_box/base_type = &"BoxContainer"

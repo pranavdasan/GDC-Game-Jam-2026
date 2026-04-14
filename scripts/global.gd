@@ -4,6 +4,7 @@ extends Node
 # id
 # ability_name
 # description
+# upgrade description
 # cooldown (0.0 means passive)
 # snow_cost
 # upgradable
@@ -14,7 +15,7 @@ var abilities : Array[Ability] = [
 		"Allows the user to replenish snow by rolling around",
 		0.0,
 		0.0,
-		false
+		true
 	),
 	Ability.new(
 		1,
@@ -22,7 +23,7 @@ var abilities : Array[Ability] = [
 		"Allows the user to launch upwards from the ground at the cost of some snow",
 		0.0,
 		4.0,
-		false
+		true
 	),
 	Ability.new(
 		2,
@@ -50,9 +51,19 @@ var abilities : Array[Ability] = [
 	)
 ]
 
+# in order of how they appear on bottom
+# text to display : button keycode
+const ability_keybinds : Dictionary[int, String] = {
+	KEY_Z : "Z",
+	KEY_X : "X",
+	KEY_C : "C",
+	KEY_V : "V",
+	KEY_B : "B"
+}
+
 const ABILITY_SHEET_PIXEL_WIDTH : int = 32
 
-const MAX_ABILITY_LEVEL : int = 10
+const MAX_ABILITY_LEVEL : int = 5
 
 const MIN_SNOW_METER : float = 0.0
 const MAX_SNOW_METER : float = 100.0
@@ -60,12 +71,22 @@ const MAX_SNOW_METER : float = 100.0
 const BUTTON_MODULATE_WAIT_TIME : float = 0.5
 
 signal owned_abilities_added()
+signal ability_upgraded()
 
 signal skill_points_changed()
 signal snow_meter_changed()
 
-var skill_points : int = 10
+var skill_points : int = 25
 var snow_meter : float = 0.0
+
+func _ready() -> void:
+	abilities[0].set_upgrade_description(AbilityHandler.BASE_GROWTH_RATE)
+	abilities[1].set_upgrade_description(AbilityHandler.BASE_JUMP_FORCE)
+	abilities[2].set_upgrade_description(abilities[2].cooldown, 5.0)
+
+# essential functions
+func die() -> void:
+	get_tree().quit()
 
 # ability functions
 func get_ability(ability_id : int) -> Ability:

@@ -30,7 +30,7 @@ func refresh_status() -> void:
 	if (
 		FocusedAbility.owned and
 		FocusedAbility.upgradable and
-		FocusedAbility.ability_level <= MAX_UPGRADE_LEVEL
+		FocusedAbility.ability_level < MAX_UPGRADE_LEVEL
 	):
 		disabled = false
 	else:

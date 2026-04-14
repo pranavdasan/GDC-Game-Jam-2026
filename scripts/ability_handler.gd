@@ -1,7 +1,9 @@
 extends Node
 
-const GROWTH_RATE : float = 0.02
-const JUMP_FORCE : float = 1250
+const BASE_GROWTH_RATE : float = 0.02
+const GROWTH_RATE_UPGRADE_MULT : float = 0.005
+const BASE_JUMP_FORCE : float = 400.0
+const JUMP_FORCE_UPGRADE_MULT : float = 100.0
 const BULLET_SPEED : float = 15000
 const DASH_SPEED : float = 1250
 
@@ -21,18 +23,10 @@ func on_ability_button_pressed(ability_id : int) -> void:
 
 func _input(event) -> void:
 	if event is InputEventKey and event.pressed:
-		#z through b keys are used, so that mouse is not used like hollow knight
-		match event.keycode:
-			KEY_Z:
-				use_ability(AbilityHud.created_ability_button_ids[0])
-			KEY_X:
-				use_ability(AbilityHud.created_ability_button_ids[1])
-			KEY_C:
-				use_ability(AbilityHud.created_ability_button_ids[2])
-			KEY_V:
-				use_ability(AbilityHud.created_ability_button_ids[3])
-			KEY_B:
-				use_ability(AbilityHud.created_ability_button_ids[4])
+		for i in Global.ability_keybinds.keys().size():
+			if event.keycode == Global.ability_keybinds.keys()[i]:
+				use_ability(AbilityHud.created_ability_button_ids[i])
+				break
 		
 		# \/ this is for arrow keys \/
 		#if event.keycode >= KEY_0 and event.keycode <= KEY_9:
@@ -62,11 +56,9 @@ func use_ability(ability_id : int) -> void:
 			# if ability is on cooldown
 			return
 		
-	# returns if:
-	# user does not have enough snow
-	# ability is on cooldown
+	# if user doesn't have enough snow, DIE!
 	if Global.snow_meter < Global.get_ability(ability_id).snow_cost:
-		return
+		Global.die()
 	
 	# for snow jump, cannot jump in air
 	if ability_id == 1 and not Snowball.touching_floor():
@@ -94,7 +86,7 @@ func use_ability(ability_id : int) -> void:
 
 ## applies jump force to snowball in up direction
 func jump_ability() -> void:
-	Snowball.apply_central_impulse(Vector2.UP * JUMP_FORCE)
+	Snowball.apply_central_impulse(Vector2.UP * BASE_JUMP_FORCE - Vector2(0, JUMP_FORCE_UPGRADE_MULT * Global.get_ability(1).ability_level))
 
 ## instantiates a snow bullet with direction of [param direction] and constant force
 func snow_bullet_ability(starting_velocity: Vector2, direction : Vector2) -> void:

@@ -22,16 +22,17 @@ func on_owned_abilities_added() -> void:
 			created_ability_button_ids.append(ability.id)
 			
 			var AbilityButton : Button = ABILITY_HUD_BUTTON.instantiate()
-			# apparently i have to make this a unique reference to this property
-			AbilityButton.icon = AbilityButton.icon.duplicate()
-			
 			AbilityButton.name = "Ability" + ability.ability_name
 			
+			# apparently i have to make this a unique reference to this property
+			AbilityButton.icon = AbilityButton.icon.duplicate()
 			# see shop_menu for what does this mean
 			AbilityButton.icon.region.position = Vector2(
 				int(ability.id) % 8 * ABILITY_SHEET_PIXEL_WIDTH,
 				floor(float(ability.id) / 8) * ABILITY_SHEET_PIXEL_WIDTH
 			)
+			
+			AbilityButton.find_child("KeybindLabel").text = Global.ability_keybinds.values()[created_ability_button_ids.find(ability.id)]
 			
 			add_child(AbilityButton)
 			

@@ -40,3 +40,14 @@ show_percentage = false
 
 [node name="CooldownTimer" type="Timer" parent="." unique_id=1243278765]
 one_shot = true
+
+[node name="KeybindLabel" type="Label" parent="." unique_id=151120312]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme = ExtResource("1_6omji")
+theme_type_variation = &"keybind_label"
+text = "Z"
+horizontal_alignment = 1
+vertical_alignment = 1
