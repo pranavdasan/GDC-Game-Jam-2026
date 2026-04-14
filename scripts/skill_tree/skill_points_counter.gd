@@ -7,4 +7,4 @@ func _ready() -> void:
 	Global.skill_points_changed.connect(on_skill_points_changed)
 
 func on_skill_points_changed() -> void:
-	text = "[b]" + str(Global.skill_points) + "P"
+	text = "[b]" + str(Global.skill_points) + "SP"

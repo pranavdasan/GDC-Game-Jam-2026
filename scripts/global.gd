@@ -52,8 +52,12 @@ var abilities : Array[Ability] = [
 
 const ABILITY_SHEET_PIXEL_WIDTH : int = 32
 
+const MAX_ABILITY_LEVEL : int = 10
+
 const MIN_SNOW_METER : float = 0.0
 const MAX_SNOW_METER : float = 100.0
+
+const BUTTON_MODULATE_WAIT_TIME : float = 0.5
 
 signal owned_abilities_added()
 

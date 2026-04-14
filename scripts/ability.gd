@@ -34,6 +34,3 @@ func set_ability_level(new_level : int) -> void:
 
 func upgrade_ability_level() -> void:
 	set_ability_level(ability_level + 1)
-
-func downgrade_ability_level() -> void:
-	set_ability_level(ability_level - 1)

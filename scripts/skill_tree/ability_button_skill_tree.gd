@@ -6,6 +6,8 @@ extends Node
 
 @onready var SkillTree : CanvasLayer = $"../../../../.."
 
+@onready var AbilityLevelBar : ProgressBar = $"../../../../DetailsContainer/ScrollContainer/VBoxContainer/AbilityLevelBar"
+
 @onready var NameLabel : RichTextLabel = $"../../../../DetailsContainer/ScrollContainer/VBoxContainer/NameLabel"
 @onready var CooldownLabel : RichTextLabel = $"../../../../DetailsContainer/ScrollContainer/VBoxContainer/CooldownLabel"
 @onready var DescriptionLabel : RichTextLabel = $"../../../../DetailsContainer/ScrollContainer/VBoxContainer/DescriptionLabel"

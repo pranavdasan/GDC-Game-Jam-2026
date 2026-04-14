@@ -13,6 +13,6 @@ func _on_pressed() -> void:
 		self.modulate = Color.RED
 
 func _on_button_up() -> void:
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(Global.BUTTON_MODULATE_WAIT_TIME).timeout
 	
 	self.modulate = Color.WHITE
