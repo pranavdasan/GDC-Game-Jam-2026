@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dwdnacbrmcun0"]
+
+[ext_resource type="SpriteFrames" uid="uid://b41e6w3yqc35i" path="res://sprite_frames/snow_punch.tres" id="1_c8n41"]
+[ext_resource type="Script" uid="uid://cts7g3pd8cvsu" path="res://scripts/abilities/snow_punch.gd" id="2_or1lm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_or1lm"]
+radius = 16.003471
+
+[node name="SnowPunch" type="AnimatedSprite2D" unique_id=1324017996]
+scale = Vector2(1.5, 1.5)
+sprite_frames = ExtResource("1_c8n41")
+animation = &"hit"
+frame = 5
+frame_progress = 1.0
+offset = Vector2(0, -20)
+script = ExtResource("2_or1lm")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=330012794]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=53928998]
+position = Vector2(0, -18.333334)
+shape = SubResource("CircleShape2D_or1lm")
+debug_color = Color(0.6518207, 0.70196074, 0, 0.41960785)
+
+[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]

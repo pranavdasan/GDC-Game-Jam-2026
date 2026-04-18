@@ -1,6 +1,6 @@
 extends Button
 
-@onready var SkillTree : CanvasLayer = $"../../../../../.."
+@onready var SkillTree : CanvasLayer = $"../../../../.."
 
 const MAX_UPGRADE_LEVEL : int = Global.MAX_ABILITY_LEVEL
 
@@ -13,7 +13,7 @@ func _on_pressed() -> void:
 	
 	if (Global.skill_points >= 1):
 		FocusedAbility.upgrade_ability_level()
-		Global.subtract_skill_points(1)
+		Global.subtract_skill_points(Global.ABILITY_UPGRADE_SP_COST)
 		
 		self.modulate = Color.GREEN
 
@@ -29,7 +29,7 @@ func refresh_status() -> void:
 		FocusedAbility.owned and
 		FocusedAbility.upgradable and
 		FocusedAbility.ability_level < MAX_UPGRADE_LEVEL and
-		Global.skill_points >= 1
+		Global.skill_points >= Global.ABILITY_UPGRADE_SP_COST
 	):
 		disabled = false
 	else:

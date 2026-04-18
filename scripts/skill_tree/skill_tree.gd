@@ -6,17 +6,19 @@ const AbilityButtonSkillTree = preload("res://scenes/ability_button_skill_tree.t
 @onready var TreeContainer : VBoxContainer = $PanelContainer/TreeScrollContainer/TreeContainer
 @onready var TreeScrollContainer : ScrollContainer = $PanelContainer/TreeScrollContainer
 
-# WHENEVER YOU WANT TO ADD A NEW ABILITY TO SHOP, INSTANTIATE IT HERE AND THEN:
+# WHENEVER YOU WANT TO ADD A NEW ABILITY TO SHOP + INSTANTIATE IT HERE AND THEN:
 ## grow ability
 var AbilityButtonZero : Button = AbilityButtonSkillTree.instantiate()
 ## jump ability
 var AbilityButtonOne : Button = AbilityButtonSkillTree.instantiate()
 ## snow bullet
 var AbilityButtonTwo : Button = AbilityButtonSkillTree.instantiate()
-## snow jetpack
+## snow punch
 var AbilityButtonThree : Button = AbilityButtonSkillTree.instantiate()
 ## dash
 var AbilityButtonFour : Button = AbilityButtonSkillTree.instantiate()
+## crushing roll
+var AbilityButtonFive : Button = AbilityButtonSkillTree.instantiate()
 
 # ADD IT TO THIS LIST
 @export var ability_buttons = [
@@ -24,17 +26,20 @@ var AbilityButtonFour : Button = AbilityButtonSkillTree.instantiate()
 	AbilityButtonOne,
 	AbilityButtonTwo,
 	AbilityButtonThree,
-	AbilityButtonFour
+	AbilityButtonFour,
+	AbilityButtonFive
 ]
 
 # \/ EDIT THIS DICT HERE FOR ADDING/REMOVING TREE ITEMS \/
 var tree_structure : Dictionary[Button, Dictionary] = {
 	AbilityButtonZero : {
 		AbilityButtonOne : {
-			AbilityButtonThree : {},
 			AbilityButtonFour : {}
 		},
-		AbilityButtonTwo : {}
+		AbilityButtonFive : {
+			AbilityButtonTwo : {},
+			AbilityButtonThree : {}
+		}
 	}
 }
 
@@ -62,6 +67,11 @@ func _ready() -> void:
 			)
 	
 	generate_tree_structure(null, 0, tree_structure)
+	
+	var LayerBlank1 : HBoxContainer = HBoxContainer.new()
+	LayerBlank1.custom_minimum_size.y = 150
+	LayerBlank1.name = "LayerBlank1"
+	TreeContainer.add_child(LayerBlank1)
 
 func _process(_delta : float) -> void:
 	reset_tree_connections()
@@ -72,34 +82,35 @@ func _input(event) -> void:
 		
 		visible = not visible
 
-# recursive function that generates formatted boxes for trees
-func generate_tree_structure(ParentButton : Button, current_layer : int, current_layer_dict : Dictionary):
+## recursive function that generates formatted boxes for trees
+func generate_tree_structure(ParentButton : Button, current_depth : int, current_layer_dict : Dictionary):
 	var LayerBox : HBoxContainer
 	
+	LayerBox = TreeContainer.get_node_or_null("Layer" + str(current_depth))
+	
 	# creates a new HBoxContainer "layer" if it doesn't already exist
-	if TreeContainer.find_child("Layer" + str(current_layer)) == null:
+	if LayerBox == null:
 		LayerBox = HBoxContainer.new()
 		LayerBox.alignment = BoxContainer.ALIGNMENT_CENTER
 		LayerBox.theme = load("res://themes/theme.tres")
 		LayerBox.theme_type_variation = "skill_tree_layer_box"
-		LayerBox.name = "Layer" + str(current_layer)
+		LayerBox.name = "Layer" + str(current_depth)
 		
 		TreeContainer.add_child(LayerBox)
-	else:
-		LayerBox = TreeContainer.find_child("Layer" + str(current_layer))
 	
 	# makes a button for each child button of the one that called this function
 	# and makes each child node call this function setting itself as the parent node (recursive)
-	for ability_button_index in current_layer_dict.keys().size():
-		var ChildButton : Button = current_layer_dict.keys()[ability_button_index]
-		
+	# first pass - adds all buttons at this depth
+	for ChildButton in current_layer_dict.keys():
 		LayerBox.add_child(ChildButton)
 		
 		# the first layer has no parent so there's not always parent button
 		if ParentButton:
 			ChildButton.parent_button = ParentButton
 		
-		generate_tree_structure(ChildButton, current_layer + 1, current_layer_dict.values()[ability_button_index])
+		# only recurse if there are children (as to not create empty boxes)
+		if not current_layer_dict[ChildButton].is_empty():
+			generate_tree_structure(ChildButton, current_depth + 1, current_layer_dict[ChildButton])
 
 func reset_tree_connections() -> void:
 	tree_position_connections.clear()
@@ -116,7 +127,7 @@ func reset_tree_connections() -> void:
 			if (
 				not AbilityButton.visible or
 				child_relative_position.y > TreeScrollContainer.size.y or 
-				parent_relative_position.y < 0
+				parent_relative_position.y + ParentAbilityButton.size.y < 0
 			):
 				continue
 			

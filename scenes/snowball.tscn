@@ -6,6 +6,15 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_xsgkx"]
 radius = 19.0
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_xsgkx"]
+b = Vector2(0, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xsgkx"]
+size = Vector2(38, 19.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dnn3y"]
+radius = 19.104973
+
 [node name="Snowball" type="RigidBody2D" unique_id=231169365]
 z_index = 1
 linear_damp = 0.5
@@ -18,9 +27,23 @@ texture = ExtResource("1_6tw0o")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=655201550]
 shape = SubResource("CircleShape2D_xsgkx")
+debug_color = Color(0.08774509, 0.70196074, 0, 0.41960785)
 
-[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1134260681]
-z_index = 1
-exclude_parent = false
-target_position = Vector2(0, 100)
-collide_with_areas = true
+[node name="FloorShapeCast2D" type="ShapeCast2D" parent="." unique_id=1965537919]
+shape = SubResource("SegmentShape2D_xsgkx")
+target_position = Vector2(0, 60)
+
+[node name="RollingCrushAttackBox" type="Area2D" parent="." unique_id=636463080]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RollingCrushAttackBox" unique_id=100161480]
+position = Vector2(0, 9.25)
+shape = SubResource("RectangleShape2D_xsgkx")
+debug_color = Color(0.70196074, 0.6674895, 0, 0.41960785)
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=1636517767]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1746567903]
+shape = SubResource("CircleShape2D_dnn3y")
+debug_color = Color(0.70196074, 0, 0, 0.41960785)
+
+[connection signal="body_entered" from="RollingCrushAttackBox" to="." method="_on_rolling_crush_attack_box_body_entered"]

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://7kyn0fdv46fa"]
 
-[ext_resource type="Script" uid="uid://ce1cbnd7pvbcl" path="res://scripts/snow_bullet/snow_bullet.gd" id="1_6hdsr"]
+[ext_resource type="Script" uid="uid://ce1cbnd7pvbcl" path="res://scripts/abilities/snow_bullet.gd" id="1_6hdsr"]
 [ext_resource type="Texture2D" uid="uid://drgwgsywkyq73" path="res://assets/images/abilities/snow_bullet.png" id="1_xr1yx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6hdsr"]

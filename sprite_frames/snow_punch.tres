@@ -1,0 +1,53 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://b41e6w3yqc35i"]
+
+[ext_resource type="Texture2D" uid="uid://10y2e6d3a3g3" path="res://assets/images/abilities/snow_punch_tilemap.png" id="1_6em47"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5lof2"]
+atlas = ExtResource("1_6em47")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qqp6h"]
+atlas = ExtResource("1_6em47")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_awavo"]
+atlas = ExtResource("1_6em47")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ckkxx"]
+atlas = ExtResource("1_6em47")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h4f54"]
+atlas = ExtResource("1_6em47")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6xg5a"]
+atlas = ExtResource("1_6em47")
+region = Rect2(160, 0, 32, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5lof2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qqp6h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_awavo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ckkxx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h4f54")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6xg5a")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 20.0
+}]

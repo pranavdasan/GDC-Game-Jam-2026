@@ -12,6 +12,7 @@ var abilities : Array[Ability] = [
 		0,
 		"Grow",
 		"Allows the user to replenish snow by rolling around",
+		"Increases the rate at which the user grows by " + str(AbilityHandler.GROWTH_RATE_UPGRADE_MULT) + "%.",
 		0.0,
 		0.0,
 		true
@@ -20,32 +21,45 @@ var abilities : Array[Ability] = [
 		1,
 		"Snow Jump",
 		"Allows the user to launch upwards from the ground at the cost of some snow",
+		"",
 		0.0,
 		4.0,
-		true
+		false
 	),
 	Ability.new(
 		2,
 		"Snow Bullet",
-		"Fires a projectile made of snow in the direction of the uesr's movement",
+		"Fires a projectile made of snow in the direction of the user's movement",
+		"Reduces cooldown by " + str(AbilityHandler.DASH_COOLDOWN_UPGRADE_MULT) + " sec + increases damage by " + str(AbilityHandler.BULLET_DAMAGE_UPGRADE_MULT) + ".",
 		AbilityHandler.BASE_BULLET_COOLDOWN,
 		2.0,
 		true
 	),
 	Ability.new(
 		3,
-		"Snow Jetpack",
-		"Boost upwards at a high speed at the cost of some snow",
-		2.0,
-		15.0,
+		"Snow Punch",
+		"Hits enemies directly in front of the user",
+		"no",
+		0.25,
+		5.0,
 		true
 	),
 	Ability.new(
 		4,
 		"Dash",
 		"Allows the user to rapidly move in a certain direction at the cost of some snow",
+		"Reduces cooldown by " + str(AbilityHandler.DASH_COOLDOWN_UPGRADE_MULT) + " sec + increases dash force by " + str(AbilityHandler.DASH_SPEED_UPGRADE_MULT) + "px/s.",
 		AbilityHandler.BASE_DASH_COOLDOWN,
 		6.0,
+		true
+	),
+	Ability.new(
+		5,
+		"Crushing Roll",
+		"Whenever the user rolls over an enemy, damage is dealt",
+		"no",
+		0.0,
+		0.0,
 		true
 	)
 ]
@@ -64,6 +78,9 @@ const ABILITY_SHEET_PIXEL_WIDTH : int = 32
 
 const MAX_ABILITY_LEVEL : int = 5
 
+const ABILITY_SP_COST : int = 5
+const ABILITY_UPGRADE_SP_COST : int = 1
+
 const MIN_SNOW_METER : float = 0.0
 const MAX_SNOW_METER : float = 100.0
 
@@ -75,14 +92,8 @@ signal ability_upgraded()
 signal skill_points_changed()
 signal snow_meter_changed()
 
-var skill_points : int = 25
+var skill_points : int = 75
 var snow_meter : float = 0.0
-
-func _ready() -> void:
-	abilities[0].set_upgrade_description(AbilityHandler.BASE_GROWTH_RATE)
-	abilities[1].set_upgrade_description(AbilityHandler.BASE_JUMP_FORCE)
-	abilities[2].set_upgrade_description(abilities[2].cooldown, AbilityHandler.BASE_BULLET_DAMAGE)
-	abilities[4].set_upgrade_description(abilities[4].cooldown, AbilityHandler.BASE_DASH_SPEED)
 
 # essential functions
 func die() -> void:

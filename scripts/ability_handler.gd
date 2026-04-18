@@ -8,10 +8,7 @@ var current_growth_rate : float = BASE_GROWTH_RATE
 
 
 # 1 snow jump
-const BASE_JUMP_FORCE : float = 400.0
-const JUMP_FORCE_UPGRADE_MULT : float = 100.0
-
-var current_jump_force : float = BASE_JUMP_FORCE
+const JUMP_FORCE : float = 850
 
 
 # 2 snow bullet
@@ -25,6 +22,13 @@ const BULLET_COOLDOWN_UPGRADE_MULT : float = 0.025
 
 var current_bullet_damage : float = BASE_BULLET_DAMAGE
 var current_bullet_cooldown : float = BASE_BULLET_COOLDOWN
+
+
+# 3 snow punch
+const BASE_PUNCH_DAMAGE : float = 10.0
+const PUNCH_DAMAGE_UPGRADE_MULT : float = 2.0
+
+var current_punch_damage : float = BASE_PUNCH_DAMAGE
 
 
 # 4 dash
@@ -43,7 +47,10 @@ const SnowBullet = preload("res://scenes/snow_bullet.tscn")
 @onready var Main : Node2D = get_node("/root/Main")
 
 @onready var AbilityHud : HBoxContainer = get_node("/root/Main/Hud/AbilityHud")
+
 @onready var Snowball : RigidBody2D = get_node("/root/Main/Snowball")
+
+@onready var SnowPunch : AnimatedSprite2D = get_node("/root/Main/Snowball/SnowPunch")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -56,23 +63,10 @@ func _input(event) -> void:
 	if event is InputEventKey and event.pressed:
 		for i in Global.ability_keybinds.keys().size():
 			if event.keycode == Global.ability_keybinds.keys()[i]:
+				if i > AbilityHud.created_ability_button_ids.size() - 1:
+					continue
 				use_ability(AbilityHud.created_ability_button_ids[i])
 				break
-		
-		# \/ this is for arrow keys \/
-		#if event.keycode >= KEY_0 and event.keycode <= KEY_9:
-			## this is the int version of key pressed
-			#var ability_button_index : int = event.keycode - KEY_0
-			#
-			## if it's zero it's actually 10 (the tenth number key)
-			#if ability_button_index == 0:
-				#ability_button_index = 10
-			#
-			## checks that this button actually has a created ability
-			#if ability_button_index <= AbilityHud.created_ability_button_ids.size():
-				## finds the ability id of this created ability button
-				#var ability_id : int = AbilityHud.created_ability_button_ids[ability_button_index - 1]
-				#use_ability(ability_id)
 
 ## checks if ability is able to be used (snow cost and cooldown) and uses respective ability
 func use_ability(ability_id : int) -> void:
@@ -105,39 +99,44 @@ func use_ability(ability_id : int) -> void:
 	# actual code for the ability
 	match ability_id:
 		0: # grow
-			pass # passive
+			pass # passive, checks in Snowball scene
 		1: # snow jump
 			jump_ability()
-		2:
+		2: # snow bullet
 			snow_bullet_ability(Snowball.linear_velocity, Snowball.last_input_vector.normalized())
-		3:
-			pass
+		3: # snow punch
+			snow_punch_ability(Snowball.last_cardinal_input_vector.angle())
 		4: # dash
-			dash_ability(Snowball.last_input_vector.normalized())
+			dash_ability(Snowball.last_input_vector)
 
 ## sets all ablity properties to their levels according to current ability level
 func update_ability_values() -> void:
 	# 0 grow
 	current_growth_rate = BASE_GROWTH_RATE + GROWTH_RATE_UPGRADE_MULT * Global.get_ability(0).ability_level
-	
-	# 1 jump
-	current_jump_force = BASE_JUMP_FORCE + JUMP_FORCE_UPGRADE_MULT * Global.get_ability(1).ability_level
+	Global.get_ability(0).stats["growth_rate"][0] = current_growth_rate
 	
 	# 2 bullet
 	current_bullet_damage = BASE_BULLET_DAMAGE + BULLET_DAMAGE_UPGRADE_MULT * Global.get_ability(2).ability_level
-	current_bullet_cooldown = BASE_BULLET_COOLDOWN + BULLET_COOLDOWN_UPGRADE_MULT * Global.get_ability(2).ability_level
+	current_bullet_cooldown = BASE_BULLET_COOLDOWN - BULLET_COOLDOWN_UPGRADE_MULT * Global.get_ability(2).ability_level
+	Global.get_ability(2).stats["bullet_damage"][0] = current_bullet_damage
 	Global.get_ability(2).set_ability_cooldown(current_bullet_cooldown)
+	
+	# 3 punch
+	current_punch_damage = BASE_PUNCH_DAMAGE + PUNCH_DAMAGE_UPGRADE_MULT * Global.get_ability(3).ability_level
+	Global.get_ability(3).stats["punch_damage"][0] = current_punch_damage
 	
 	# 4 dash
 	current_dash_speed = BASE_DASH_SPEED + DASH_SPEED_UPGRADE_MULT * Global.get_ability(4).ability_level
-	current_dash_cooldown = BASE_DASH_COOLDOWN + DASH_COOLDOWN_UPGRADE_MULT * Global.get_ability(4).ability_level
+	current_dash_cooldown = BASE_DASH_COOLDOWN - DASH_COOLDOWN_UPGRADE_MULT * Global.get_ability(4).ability_level
+	Global.get_ability(4).stats["dash_speed"][0] = current_dash_speed
 	Global.get_ability(4).set_ability_cooldown(current_dash_cooldown)
 
-## applies jump force to snowball in up direction
+## 1 applies jump force to snowball in up direction
 func jump_ability() -> void:
-	Snowball.apply_central_impulse(Vector2.UP * current_jump_force)
+	Snowball.linear_velocity.y = 0
+	Snowball.apply_central_impulse(Vector2.UP * JUMP_FORCE)
 
-## instantiates a snow bullet with direction of [param direction] and constant force
+## 2 instantiates a snow bullet with direction of [param direction] and constant force
 func snow_bullet_ability(starting_velocity: Vector2, direction : Vector2) -> void:
 	var SnowBulletInstance : RigidBody2D = SnowBullet.instantiate()
 	SnowBulletInstance.position = Snowball.position
@@ -146,6 +145,10 @@ func snow_bullet_ability(starting_velocity: Vector2, direction : Vector2) -> voi
 	SnowBulletInstance.linear_velocity = starting_velocity
 	Main.add_child(SnowBulletInstance)
 
-## applies force to snowball in direction of [param direction]
+## 3 calls the punch function in SnowPunch with direction of [param direction]
+func snow_punch_ability(angle : float):
+	SnowPunch.punch(rad_to_deg(angle) + 90)
+
+## 4 applies force to snowball in direction of [param direction]
 func dash_ability(direction : Vector2) -> void:
 	Snowball.apply_central_impulse(direction * current_dash_speed)

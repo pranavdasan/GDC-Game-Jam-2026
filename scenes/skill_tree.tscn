@@ -45,8 +45,8 @@ theme = ExtResource("2_h52vt")
 theme_type_variation = &"skill_tree_layer_box"
 alignment = 1
 
-[node name="LayerBlank" type="HBoxContainer" parent="PanelContainer/TreeScrollContainer/TreeContainer" unique_id=1245377676]
-custom_minimum_size = Vector2(150, 150)
+[node name="LayerBlank0" type="HBoxContainer" parent="PanelContainer/TreeScrollContainer/TreeContainer" unique_id=1245377676]
+custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 
 [node name="SkillPointsCounter" type="RichTextLabel" parent="PanelContainer" unique_id=2144984679]
@@ -65,14 +65,13 @@ vertical_alignment = 1
 script = ExtResource("5_urm3n")
 
 [node name="DetailsContainer" type="FoldableContainer" parent="PanelContainer" unique_id=1203505884]
-z_index = 4
+z_index = 6
 custom_minimum_size = Vector2(500, 400)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 theme = ExtResource("2_h52vt")
 title = "Ability Details"
-title_alignment = 2
 title_position = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/DetailsContainer" unique_id=1269198155]
@@ -86,11 +85,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 15
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer" unique_id=592835644]
-layout_mode = 2
-alignment = 1
-
-[node name="BuyButton" type="Button" parent="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1927376356]
+[node name="BuyButton" type="Button" parent="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer" unique_id=1927376356]
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -99,37 +94,6 @@ action_mode = 0
 text = "BUY"
 script = ExtResource("5_6awrb")
 
-[node name="UpgradeButton" type="Button" parent="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1384994580]
-custom_minimum_size = Vector2(150, 50)
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("2_h52vt")
-disabled = true
-action_mode = 0
-text = "UPGRADE"
-script = ExtResource("7_h52vt")
-
-[node name="AbilityLevelBar" type="ProgressBar" parent="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer" unique_id=904703884]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-theme = ExtResource("2_h52vt")
-theme_type_variation = &"ability_level_bar"
-max_value = 5.0
-step = 1.0
-value = 3.0
-show_percentage = false
-
-[node name="AbilityLevelLabel" type="Label" parent="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer/AbilityLevelBar" unique_id=2140819008]
-layout_mode = 0
-offset_right = 452.0
-offset_bottom = 30.0
-theme = ExtResource("2_h52vt")
-theme_override_colors/font_color = Color(0.105882354, 0.101960786, 0.101960786, 1)
-theme_override_fonts/font = ExtResource("4_hwd2a")
-text = "ABILITY LEVEL"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="NameLabel" type="RichTextLabel" parent="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer" unique_id=418901426]
 layout_mode = 2
 size_flags_vertical = 4
@@ -137,15 +101,6 @@ theme = ExtResource("2_h52vt")
 theme_type_variation = &"description_label"
 bbcode_enabled = true
 text = "[b]Name:[/b]"
-fit_content = true
-
-[node name="CooldownLabel" type="RichTextLabel" parent="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer" unique_id=829153444]
-layout_mode = 2
-size_flags_vertical = 4
-theme = ExtResource("2_h52vt")
-theme_type_variation = &"description_label"
-bbcode_enabled = true
-text = "[b]Cooldown:[/b]"
 fit_content = true
 
 [node name="DescriptionLabel" type="RichTextLabel" parent="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer" unique_id=944941027]
@@ -158,7 +113,60 @@ text = "[b]Description:[/b]"
 fit_content = true
 scroll_active = false
 
-[node name="UpgradeDescriptionLabel" type="RichTextLabel" parent="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer" unique_id=1033566395]
+[node name="StatsContainer" type="FoldableContainer" parent="PanelContainer" unique_id=478244469]
+z_index = 6
+custom_minimum_size = Vector2(500, 400)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme = ExtResource("2_h52vt")
+title = "Ability Stats"
+title_alignment = 2
+title_position = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/StatsContainer" unique_id=40025522]
+layout_mode = 2
+theme = ExtResource("2_h52vt")
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/StatsContainer/ScrollContainer" unique_id=2015250084]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 15
+
+[node name="UpgradeButton" type="Button" parent="PanelContainer/StatsContainer/ScrollContainer/VBoxContainer" unique_id=1384994580]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_h52vt")
+disabled = true
+action_mode = 0
+text = "UPGRADE"
+script = ExtResource("7_h52vt")
+
+[node name="AbilityLevelBar" type="ProgressBar" parent="PanelContainer/StatsContainer/ScrollContainer/VBoxContainer" unique_id=904703884]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme = ExtResource("2_h52vt")
+theme_type_variation = &"ability_level_bar"
+max_value = 5.0
+step = 1.0
+value = 3.0
+show_percentage = false
+
+[node name="AbilityLevelLabel" type="Label" parent="PanelContainer/StatsContainer/ScrollContainer/VBoxContainer/AbilityLevelBar" unique_id=2140819008]
+layout_mode = 0
+offset_right = 452.0
+offset_bottom = 30.0
+theme = ExtResource("2_h52vt")
+theme_override_colors/font_color = Color(0.105882354, 0.101960786, 0.101960786, 1)
+theme_override_fonts/font = ExtResource("4_hwd2a")
+text = "ABILITY LEVEL"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpgradeDescriptionLabel" type="RichTextLabel" parent="PanelContainer/StatsContainer/ScrollContainer/VBoxContainer" unique_id=1033566395]
 layout_mode = 2
 size_flags_vertical = 4
 theme = ExtResource("2_h52vt")
@@ -168,7 +176,50 @@ text = "[b]When Upgraded:[/b]"
 fit_content = true
 scroll_active = false
 
-[connection signal="button_up" from="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer/HBoxContainer/BuyButton" to="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer/HBoxContainer/BuyButton" method="_on_button_up"]
-[connection signal="pressed" from="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer/HBoxContainer/BuyButton" to="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer/HBoxContainer/BuyButton" method="_on_pressed"]
-[connection signal="button_up" from="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer/HBoxContainer/UpgradeButton" to="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer/HBoxContainer/UpgradeButton" method="_on_button_up"]
-[connection signal="pressed" from="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer/HBoxContainer/UpgradeButton" to="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer/HBoxContainer/UpgradeButton" method="_on_pressed"]
+[node name="StatsDivider" type="RichTextLabel" parent="PanelContainer/StatsContainer/ScrollContainer/VBoxContainer" unique_id=1685072000]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("2_h52vt")
+theme_type_variation = &"description_label"
+bbcode_enabled = true
+text = "[b]Current Stats
+[/b]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="CooldownLabel" type="RichTextLabel" parent="PanelContainer/StatsContainer/ScrollContainer/VBoxContainer" unique_id=1481394866]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("2_h52vt")
+theme_type_variation = &"description_label"
+bbcode_enabled = true
+text = "[b]Cooldown:[/b]"
+fit_content = true
+scroll_active = false
+
+[node name="StatLabel0" type="RichTextLabel" parent="PanelContainer/StatsContainer/ScrollContainer/VBoxContainer" unique_id=2071157545]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("2_h52vt")
+theme_type_variation = &"description_label"
+bbcode_enabled = true
+text = "[b]Stat1:[/b]"
+fit_content = true
+scroll_active = false
+
+[node name="StatLabel1" type="RichTextLabel" parent="PanelContainer/StatsContainer/ScrollContainer/VBoxContainer" unique_id=829153444]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("2_h52vt")
+theme_type_variation = &"description_label"
+bbcode_enabled = true
+text = "[b]Stat2:[/b]"
+fit_content = true
+
+[connection signal="button_up" from="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer/BuyButton" to="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer/BuyButton" method="_on_button_up"]
+[connection signal="pressed" from="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer/BuyButton" to="PanelContainer/DetailsContainer/ScrollContainer/VBoxContainer/BuyButton" method="_on_pressed"]
+[connection signal="button_up" from="PanelContainer/StatsContainer/ScrollContainer/VBoxContainer/UpgradeButton" to="PanelContainer/StatsContainer/ScrollContainer/VBoxContainer/UpgradeButton" method="_on_button_up"]
+[connection signal="pressed" from="PanelContainer/StatsContainer/ScrollContainer/VBoxContainer/UpgradeButton" to="PanelContainer/StatsContainer/ScrollContainer/VBoxContainer/UpgradeButton" method="_on_pressed"]
