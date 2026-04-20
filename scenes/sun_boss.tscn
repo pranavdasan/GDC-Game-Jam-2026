@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://cb76rhbu4yea1"]
+
+[ext_resource type="Script" uid="uid://xh00gpwwngv8" path="res://scripts/sun_boss.gd" id="1_wfgxt"]
+[ext_resource type="Texture2D" uid="uid://dyjyp8ydy6mem" path="res://assets/sun_boss/idle_sun_boss.png" id="1_wwaw5"]
+[ext_resource type="PackedScene" uid="uid://dtwdwh0w76qqq" path="res://scenes/health_bar.tscn" id="3_bedb7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wfgxt"]
+atlas = ExtResource("1_wwaw5")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bedb7"]
+atlas = ExtResource("1_wwaw5")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v7mcf"]
+atlas = ExtResource("1_wwaw5")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4lusc"]
+atlas = ExtResource("1_wwaw5")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i3esf"]
+atlas = ExtResource("1_wwaw5")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1gueu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wfgxt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bedb7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v7mcf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4lusc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i3esf")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wwaw5"]
+radius = 13.752247
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=406474926]
+scale = Vector2(3, 3)
+script = ExtResource("1_wfgxt")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=972186315]
+sprite_frames = SubResource("SpriteFrames_1gueu")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.15971112
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=749352380]
+scale = Vector2(1.0000001, 1.0000001)
+shape = SubResource("CircleShape2D_wwaw5")
+
+[node name="Health Bar" parent="." unique_id=1965166211 instance=ExtResource("3_bedb7")]
+offset_left = -18.333332
+offset_top = -22.333334
+offset_right = 21.666668
+offset_bottom = 17.666666
+scale = Vector2(0.7002818, 0.70061773)
+low_hp_pulse = true
+damage_shake = true

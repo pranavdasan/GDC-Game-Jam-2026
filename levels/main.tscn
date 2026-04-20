@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://wxd7weptev4l" path="res://scenes/hud.tscn" id="4_m1504"]
 [ext_resource type="PackedScene" uid="uid://dwdnacbrmcun0" path="res://scenes/snow_punch.tscn" id="4_qy63d"]
 [ext_resource type="PackedScene" uid="uid://bqe4b4i6kscsm" path="res://scenes/world_boundary.tscn" id="6_5k4jt"]
+[ext_resource type="PackedScene" uid="uid://cb76rhbu4yea1" path="res://scenes/sun_boss.tscn" id="7_qy63d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wdj6m"]
 texture = ExtResource("2_wdj6m")
@@ -41,3 +42,6 @@ zoom = Vector2(0.9, 0.9)
 position_smoothing_enabled = true
 
 [node name="SnowPunch" parent="Snowball" unique_id=1324017996 instance=ExtResource("4_qy63d")]
+
+[node name="CharacterBody2D" parent="." unique_id=406474926 instance=ExtResource("7_qy63d")]
+position = Vector2(1574, -3)
