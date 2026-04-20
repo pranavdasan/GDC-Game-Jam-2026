@@ -19,8 +19,6 @@ func punch(p_angle : float):
 	scale = ORIGINAL_SCALE * Snowball.scale_ratio
 	angle = p_angle
 	
-	print(angle)
-	
 	# the angles are really weird idk;
 	# first it's in radians so it is 0 to 180 or 0 to -180
 	# second the snowball's 0deg is facing right so i added 90

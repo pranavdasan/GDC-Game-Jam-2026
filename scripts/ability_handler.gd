@@ -33,13 +33,16 @@ var current_punch_damage : float = BASE_PUNCH_DAMAGE
 
 # 4 dash
 const BASE_DASH_SPEED : float = 300
-const DASH_SPEED_UPGRADE_MULT : float = 230
+const DASH_SPEED_UPGRADE_MULT : float = 125
 
 const BASE_DASH_COOLDOWN : float = 1.0
 const DASH_COOLDOWN_UPGRADE_MULT : = 0.05
 
 var current_dash_speed : float = BASE_DASH_SPEED
 var current_dash_cooldown : float = BASE_DASH_COOLDOWN
+
+const BASE_DASH_PARTICLE_SCALE_MIN : float = 4.0
+const BASE_DASH_PARTICLE_SCALE_MAX : float = 5.0
 
 
 const SnowBullet = preload("res://scenes/snow_bullet.tscn")
@@ -105,7 +108,7 @@ func use_ability(ability_id : int) -> void:
 		2: # snow bullet
 			snow_bullet_ability(Snowball.linear_velocity, Snowball.last_input_vector.normalized())
 		3: # snow punch
-			snow_punch_ability(Snowball.last_cardinal_input_vector.angle())
+			snow_punch_ability(Snowball.last_input_vector.angle())
 		4: # dash
 			dash_ability(Snowball.last_input_vector)
 
@@ -151,4 +154,13 @@ func snow_punch_ability(angle : float):
 
 ## 4 applies force to snowball in direction of [param direction]
 func dash_ability(direction : Vector2) -> void:
+	var DashParticles : GPUParticles2D = Snowball.find_child("DashParticles")
+	DashParticles.process_material.set("direction", Vector3(direction.x, direction.y, 0))
+	DashParticles.process_material.set("scale_min", BASE_DASH_PARTICLE_SCALE_MIN * Snowball.scale_ratio)
+	DashParticles.process_material.set("scale_max", BASE_DASH_PARTICLE_SCALE_MAX * Snowball.scale_ratio)
+	
 	Snowball.apply_central_impulse(direction * current_dash_speed)
+	
+	#DashParticles.process_material.set("initial_velocity", Snowball.linear_velocity)
+	
+	DashParticles.emitting = true

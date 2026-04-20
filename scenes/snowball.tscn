@@ -15,6 +15,45 @@ size = Vector2(38, 19.5)
 [sub_resource type="CircleShape2D" id="CircleShape2D_dnn3y"]
 radius = 19.104973
 
+[sub_resource type="Curve" id="Curve_xsgkx"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.1706724, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_dnn3y"]
+curve = SubResource("Curve_xsgkx")
+
+[sub_resource type="Curve" id="Curve_dnn3y"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 157.9992), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_svv1h"]
+curve = SubResource("Curve_dnn3y")
+
+[sub_resource type="Curve" id="Curve_8kbcc"]
+_limits = [0.0, 10.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.976, 6), 18.238356, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_k6q0j"]
+curve = SubResource("Curve_8kbcc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xsgkx"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angle_min = -44.99999
+angle_max = 45.00001
+angle_curve = SubResource("CurveTexture_svv1h")
+direction = Vector3(1, 1, 0)
+spread = 90.0
+initial_velocity_min = 300.0
+initial_velocity_max = 400.0
+gravity = Vector3(0, 0, 0)
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_k6q0j")
+alpha_curve = SubResource("CurveTexture_dnn3y")
+
 [node name="Snowball" type="RigidBody2D" unique_id=231169365]
 z_index = 1
 linear_damp = 0.5
@@ -41,9 +80,19 @@ shape = SubResource("RectangleShape2D_xsgkx")
 debug_color = Color(0.70196074, 0.6674895, 0, 0.41960785)
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=1636517767]
+scale = Vector2(0.5, 0.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1746567903]
 shape = SubResource("CircleShape2D_dnn3y")
 debug_color = Color(0.70196074, 0, 0, 0.41960785)
+
+[node name="DashParticles" type="GPUParticles2D" parent="." unique_id=2005861734]
+show_behind_parent = true
+emitting = false
+amount = 30
+lifetime = 0.5
+one_shot = true
+preprocess = 0.1
+process_material = SubResource("ParticleProcessMaterial_xsgkx")
 
 [connection signal="body_entered" from="RollingCrushAttackBox" to="." method="_on_rolling_crush_attack_box_body_entered"]
