@@ -44,8 +44,7 @@ var current_dash_cooldown : float = BASE_DASH_COOLDOWN
 const BASE_DASH_PARTICLE_SCALE_MIN : float = 4.0
 const BASE_DASH_PARTICLE_SCALE_MAX : float = 5.0
 
-
-const SnowBullet = preload("res://scenes/snow_bullet.tscn")
+const SnowBullet = preload("res://scenes/player/snow_bullet.tscn")
 
 @onready var Main : Node2D = get_node("/root/Main")
 

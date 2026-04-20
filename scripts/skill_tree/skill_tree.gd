@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 const ABILITY_SHEET_PIXEL_WIDTH = Global.ABILITY_SHEET_PIXEL_WIDTH
-const AbilityButtonSkillTree = preload("res://scenes/ability_button_skill_tree.tscn")
+const AbilityButtonSkillTree = preload("res://scenes/ui/ability_button_skill_tree.tscn")
 
 @onready var TreeContainer : VBoxContainer = $PanelContainer/TreeScrollContainer/TreeContainer
 @onready var TreeScrollContainer : ScrollContainer = $PanelContainer/TreeScrollContainer

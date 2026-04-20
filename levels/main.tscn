@@ -1,12 +1,13 @@
 [gd_scene format=4 uid="uid://dsiqdluh170ov"]
 
-[ext_resource type="PackedScene" uid="uid://bdx66lu38ywr" path="res://scenes/snowball.tscn" id="1_2262g"]
+[ext_resource type="PackedScene" uid="uid://bdx66lu38ywr" path="res://scenes/player/snowball.tscn" id="1_2262g"]
 [ext_resource type="Texture2D" uid="uid://dbav4gaw8uehp" path="res://assets/images/tilemaps/snow_ground.png" id="2_wdj6m"]
-[ext_resource type="PackedScene" uid="uid://dou7gvlvywfc4" path="res://scenes/skill_tree.tscn" id="4_5k4jt"]
-[ext_resource type="PackedScene" uid="uid://wxd7weptev4l" path="res://scenes/hud.tscn" id="4_m1504"]
-[ext_resource type="PackedScene" uid="uid://dwdnacbrmcun0" path="res://scenes/snow_punch.tscn" id="4_qy63d"]
-[ext_resource type="PackedScene" uid="uid://bqe4b4i6kscsm" path="res://scenes/world_boundary.tscn" id="6_5k4jt"]
-[ext_resource type="PackedScene" uid="uid://cb76rhbu4yea1" path="res://scenes/sun_boss.tscn" id="7_qy63d"]
+[ext_resource type="PackedScene" uid="uid://dou7gvlvywfc4" path="res://scenes/ui/skill_tree.tscn" id="4_5k4jt"]
+[ext_resource type="PackedScene" uid="uid://wxd7weptev4l" path="res://scenes/ui/hud.tscn" id="4_m1504"]
+[ext_resource type="PackedScene" uid="uid://dwdnacbrmcun0" path="res://scenes/player/snow_punch.tscn" id="4_qy63d"]
+[ext_resource type="PackedScene" uid="uid://cb76rhbu4yea1" path="res://scenes/enemies/sun_boss.tscn" id="7_qy63d"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_5k4jt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wdj6m"]
 texture = ExtResource("2_wdj6m")
@@ -21,8 +22,11 @@ sources/0 = SubResource("TileSetAtlasSource_wdj6m")
 
 [node name="Main" type="Node2D" unique_id=1138941841]
 
-[node name="WorldBoundary" parent="." unique_id=875849604 groups=["terrain"] instance=ExtResource("6_5k4jt")]
+[node name="WorldBoundary" type="StaticBody2D" parent="." unique_id=460605745 groups=["terrain"]]
 position = Vector2(0, 112.5)
+
+[node name="BottomEdge" type="CollisionShape2D" parent="WorldBoundary" unique_id=171446947 groups=["terrain"]]
+shape = SubResource("WorldBoundaryShape2D_5k4jt")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1755820554 groups=["terrain"]]
 scale = Vector2(0.25, 0.25)

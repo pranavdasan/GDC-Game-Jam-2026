@@ -1,6 +1,6 @@
 extends HBoxContainer
 
-const ABILITY_HUD_BUTTON = preload("res://scenes/ability_button_hud.tscn")
+const ABILITY_HUD_BUTTON = preload("res://scenes/ui/ability_button_hud.tscn")
 const ABILITY_SHEET_PIXEL_WIDTH : int = Global.ABILITY_SHEET_PIXEL_WIDTH
 
 signal ability_button_pressed(ability_id : int)

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://xh00gpwwngv8" path="res://scripts/sun_boss.gd" id="1_wfgxt"]
 [ext_resource type="Texture2D" uid="uid://dyjyp8ydy6mem" path="res://assets/sun_boss/idle_sun_boss.png" id="1_wwaw5"]
-[ext_resource type="PackedScene" uid="uid://dtwdwh0w76qqq" path="res://scenes/health_bar.tscn" id="3_bedb7"]
+[ext_resource type="PackedScene" uid="uid://dtwdwh0w76qqq" path="res://scenes/enemies/health_bar.tscn" id="3_bedb7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wfgxt"]
 atlas = ExtResource("1_wwaw5")
