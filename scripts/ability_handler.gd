@@ -56,7 +56,7 @@ const SnowBullet = preload("res://scenes/player/snow_bullet.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	AbilityHud.ability_button_pressed.connect(on_ability_button_pressed)
+	pass#AbilityHud.ability_button_pressed.connect(on_ability_button_pressed)
 
 func on_ability_button_pressed(ability_id : int) -> void:
 	use_ability(ability_id)

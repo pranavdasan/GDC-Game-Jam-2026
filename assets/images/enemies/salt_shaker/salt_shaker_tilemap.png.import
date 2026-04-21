@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dyjyp8ydy6mem"
-path="res://.godot/imported/idle_sun_boss.png-63b2b14d0e2656731aa00372c9e7eb9e.ctex"
+uid="uid://kq2nuga0ict7"
+path="res://.godot/imported/salt_shaker_tilemap.png-37bdb69785929bf85006c4ed73ea9a1a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sun_boss/idle_sun_boss.png"
-dest_files=["res://.godot/imported/idle_sun_boss.png-63b2b14d0e2656731aa00372c9e7eb9e.ctex"]
+source_file="res://assets/images/enemies/salt_shaker/salt_shaker_tilemap.png"
+dest_files=["res://.godot/imported/salt_shaker_tilemap.png-37bdb69785929bf85006c4ed73ea9a1a.ctex"]
 
 [params]
 
