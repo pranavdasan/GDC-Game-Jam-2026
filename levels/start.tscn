@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://87ppvp0a0l06"]
+
+[ext_resource type="Script" uid="uid://b6h2hp4n0nmvq" path="res://start.gd" id="1_ylpfq"]
+[ext_resource type="Texture2D" uid="uid://bfu2lwvcdmpmu" path="res://assets/images/Title.png" id="2_rnrel"]
+[ext_resource type="Texture2D" uid="uid://ciux6til872lg" path="res://assets/images/PlayButton.png" id="3_pcni8"]
+
+[sub_resource type="Animation" id="Animation_ylpfq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_16v5a"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_rnrel"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rnrel"]
+_data = {
+&"RESET": SubResource("Animation_ylpfq"),
+&"fade_in": SubResource("Animation_16v5a"),
+&"fade_out": SubResource("Animation_rnrel")
+}
+
+[node name="Start" type="Node2D" unique_id=766246066]
+script = ExtResource("1_ylpfq")
+
+[node name="Title" type="Sprite2D" parent="." unique_id=39715233]
+position = Vector2(0, -216.00003)
+scale = Vector2(1.4800024, 1.4800024)
+texture = ExtResource("2_rnrel")
+
+[node name="TextureButton" type="TextureButton" parent="." unique_id=125046842]
+offset_left = -168.0
+offset_top = 144.00002
+offset_right = 432.0
+offset_bottom = 471.0
+scale = Vector2(0.5658084, 0.5658084)
+texture_normal = ExtResource("3_pcni8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1344650153]
+libraries/ = SubResource("AnimationLibrary_rnrel")
+autoplay = &"fade_in"
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=929336808]
+position = Vector2(9.536743e-07, 1.9073486e-06)
+scale = Vector2(0.5658084, 0.5658084)
+zoom = Vector2(0.9, 0.9)
+position_smoothing_enabled = true
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

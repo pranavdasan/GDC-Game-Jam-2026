@@ -7,6 +7,13 @@ extends CharacterBody2D
 @onready var spawn_point = $"Orb Spawn Point"
 @onready var attack_timer = $Timer
 
+@export var max_hp : float = 100;
+@export var current_hp : float = 100;
+@onready var health_bar : HealthBar = $"Health Bar"
+
+
+
+
 var player: Node2D
 
 func _ready() -> void:
@@ -17,6 +24,15 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+		
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+		# Hit the player
+		if collider.is_in_group("snow_bullet"):
+			print
+			current_hp = current_hp - 5.0 
+			health_bar.update_bar(current_hp, max_hp)
 	
 	move_and_slide()
 
