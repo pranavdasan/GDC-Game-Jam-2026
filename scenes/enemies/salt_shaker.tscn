@@ -164,8 +164,11 @@ script = ExtResource("1_j4pow")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=162310005]
 sprite_frames = SubResource("SpriteFrames_dy1wv")
-animation = &"flip"
+animation = &"shake"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2059004336]
 position = Vector2(0.5, 1)
 shape = SubResource("RectangleShape2D_tql7j")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]
