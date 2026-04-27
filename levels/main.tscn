@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dou7gvlvywfc4" path="res://scenes/ui/skill_tree.tscn" id="4_5k4jt"]
 [ext_resource type="PackedScene" uid="uid://wxd7weptev4l" path="res://scenes/ui/hud.tscn" id="4_m1504"]
 [ext_resource type="PackedScene" uid="uid://dwdnacbrmcun0" path="res://scenes/player/snow_punch.tscn" id="4_qy63d"]
-[ext_resource type="PackedScene" uid="uid://cb76rhbu4yea1" path="res://scenes/enemies/sun_boss.tscn" id="7_qy63d"]
+[ext_resource type="PackedScene" uid="uid://cb76rhbu4yea1" path="res://scenes/enemies/Sun Boss/sun_boss.tscn" id="7_qy63d"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_5k4jt"]
 
@@ -47,5 +47,5 @@ position_smoothing_enabled = true
 
 [node name="SnowPunch" parent="Snowball" unique_id=1324017996 instance=ExtResource("4_qy63d")]
 
-[node name="CharacterBody2D" parent="." unique_id=406474926 instance=ExtResource("7_qy63d")]
-position = Vector2(1574, -3)
+[node name="Sun Boss" parent="." unique_id=406474926 instance=ExtResource("7_qy63d")]
+position = Vector2(884, 21)

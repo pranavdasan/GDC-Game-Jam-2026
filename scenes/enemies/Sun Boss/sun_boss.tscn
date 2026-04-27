@@ -1,27 +1,28 @@
 [gd_scene format=3 uid="uid://cb76rhbu4yea1"]
 
-[ext_resource type="Script" uid="uid://xh00gpwwngv8" path="res://scripts/enemies/sun_boss.gd" id="1_wfgxt"]
-[ext_resource type="Texture2D" uid="uid://dyjyp8ydy6mem" path="res://assets/images/enemies/sun_boss/idle_sun_boss.png" id="1_wwaw5"]
-[ext_resource type="PackedScene" uid="uid://dtwdwh0w76qqq" path="res://scenes/enemies/health_bar.tscn" id="3_bedb7"]
+[ext_resource type="Script" uid="uid://xh00gpwwngv8" path="res://scripts/enemies/sun_boss.gd" id="1_0ljrg"]
+[ext_resource type="Texture2D" uid="uid://dyjyp8ydy6mem" path="res://assets/images/enemies/sun_boss/idle_sun_boss.png" id="2_h2vtw"]
+[ext_resource type="PackedScene" uid="uid://bmah3nvebl0kk" path="res://scenes/enemies/Sun Boss/sun_orb.tscn" id="2_k46ju"]
+[ext_resource type="PackedScene" uid="uid://dtwdwh0w76qqq" path="res://scenes/enemies/health_bar.tscn" id="3_k46ju"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wfgxt"]
-atlas = ExtResource("1_wwaw5")
+atlas = ExtResource("2_h2vtw")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bedb7"]
-atlas = ExtResource("1_wwaw5")
+atlas = ExtResource("2_h2vtw")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v7mcf"]
-atlas = ExtResource("1_wwaw5")
+atlas = ExtResource("2_h2vtw")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4lusc"]
-atlas = ExtResource("1_wwaw5")
+atlas = ExtResource("2_h2vtw")
 region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i3esf"]
-atlas = ExtResource("1_wwaw5")
+atlas = ExtResource("2_h2vtw")
 region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1gueu"]
@@ -50,9 +51,10 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_wwaw5"]
 radius = 13.752247
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=406474926]
+[node name="Sun Boss" type="CharacterBody2D" unique_id=406474926]
 scale = Vector2(3, 3)
-script = ExtResource("1_wfgxt")
+script = ExtResource("1_0ljrg")
+sun_orb_scene = ExtResource("2_k46ju")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=972186315]
 sprite_frames = SubResource("SpriteFrames_1gueu")
@@ -64,7 +66,7 @@ frame_progress = 0.15971112
 scale = Vector2(1.0000001, 1.0000001)
 shape = SubResource("CircleShape2D_wwaw5")
 
-[node name="Health Bar" parent="." unique_id=1965166211 instance=ExtResource("3_bedb7")]
+[node name="Health Bar" parent="." unique_id=1965166211 instance=ExtResource("3_k46ju")]
 offset_left = -18.333332
 offset_top = -22.333334
 offset_right = 21.666668
@@ -72,3 +74,10 @@ offset_bottom = 17.666666
 scale = Vector2(0.7002818, 0.70061773)
 low_hp_pulse = true
 damage_shake = true
+
+[node name="Orb Spawn Point" type="Marker2D" parent="." unique_id=786798831]
+position = Vector2(0, -32.333332)
+
+[node name="Timer" type="Timer" parent="." unique_id=1018426961]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
