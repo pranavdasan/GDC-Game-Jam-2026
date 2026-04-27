@@ -40,7 +40,7 @@ func hover_and_strike():
 		target_position = player.global_position
 		is_attacking = true # Give the green light to start moving
 
-func _physics_process(delta):
+func _physics_process(_delta : float):
 	if is_attacking:
 		# Calculate the direction to the saved target_position
 		var direction = global_position.direction_to(target_position)

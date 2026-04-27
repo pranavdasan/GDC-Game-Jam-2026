@@ -30,7 +30,6 @@ func _physics_process(delta: float) -> void:
 		var collider = collision.get_collider()
 		# Hit the player
 		if collider.is_in_group("snow_bullet"):
-			print
 			current_hp = current_hp - 5.0 
 			health_bar.update_bar(current_hp, max_hp)
 	

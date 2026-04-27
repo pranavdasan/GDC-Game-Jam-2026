@@ -92,6 +92,8 @@ signal ability_upgraded()
 signal skill_points_changed()
 signal snow_meter_changed()
 
+signal main_ready()
+
 var skill_points : int = 75
 var snow_meter : float = 0.0
 

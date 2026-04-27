@@ -44,19 +44,25 @@ var current_dash_cooldown : float = BASE_DASH_COOLDOWN
 const BASE_DASH_PARTICLE_SCALE_MIN : float = 4.0
 const BASE_DASH_PARTICLE_SCALE_MAX : float = 5.0
 
+
 const SnowBullet = preload("res://scenes/player/snow_bullet.tscn")
 
-@onready var Main : Node2D = get_node("/root/Main")
+# to be defined when main is entered into the scene:
+var Main : Node2D 
+var AbilityHud : HBoxContainer
+var Snowball : RigidBody2D
+var SnowPunch : AnimatedSprite2D
 
-@onready var AbilityHud : HBoxContainer = get_node("/root/Main/Hud/AbilityHud")
-
-@onready var Snowball : RigidBody2D = get_node("/root/Main/Snowball")
-
-@onready var SnowPunch : AnimatedSprite2D = get_node("/root/Main/Snowball/SnowPunch")
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass#AbilityHud.ability_button_pressed.connect(on_ability_button_pressed)
+	Global.main_ready.connect(on_main_ready)
+
+func on_main_ready() -> void:
+	Main = get_node("/root/Main")
+	AbilityHud = get_node("/root/Main/Hud/AbilityHud")
+	Snowball = get_node("/root/Main/Snowball")
+	SnowPunch = get_node("/root/Main/Snowball/SnowPunch")
+	
+	AbilityHud.ability_button_pressed.connect(on_ability_button_pressed)
 
 func on_ability_button_pressed(ability_id : int) -> void:
 	use_ability(ability_id)
